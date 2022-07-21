@@ -1,0 +1,48 @@
+.repositorio {
+    width: 500px;
+    height: 500px;
+    margin: 20px auto 20px auto; 
+    background-color: rgba(9, 9, 9, 0.8);
+    border-radius: 50px;
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0),
+    0px 10px 13px -7px #000000;
+   
+}
+
+.repositorio h1 {
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+}
+
+.repositorio>div {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+}
+
+.repositorio>div>div{
+    width: 200px;
+    height: 80px;
+    border: 2px solid white;
+    margin: 30px 10px;
+    border-radius: 15px;
+    color: white; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.repositorio a{
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+}
+
+.repositorio p{
+    font-size: 12px;
+    margin-top: 10px;
+    font-style: italic;
+    color: #999;
+}

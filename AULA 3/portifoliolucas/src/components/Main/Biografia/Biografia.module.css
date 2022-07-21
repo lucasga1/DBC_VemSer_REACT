@@ -1,0 +1,25 @@
+.bio {
+    width: 500px;
+    height: 150px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(9, 9, 9, 0.8);
+    margin-top: 20px;
+    border-radius: 50px;
+    box-shadow: 5px 5px 15px 5px rgba(0,0,0,0),
+    0px 10px 13px -7px #000000;
+}
+
+.bio p {
+    color: white;
+    text-align: center;
+}
+
+.bio h1{
+    font-size: 24px;
+    padding-bottom: 10px;
+    color: white;
+}
