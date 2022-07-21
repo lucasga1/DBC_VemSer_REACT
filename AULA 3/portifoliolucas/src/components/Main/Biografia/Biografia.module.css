@@ -16,10 +16,18 @@
 .bio p {
     color: white;
     text-align: center;
+    width: 220px;
 }
 
 .bio h1{
     font-size: 24px;
     padding-bottom: 10px;
     color: white;
+}
+
+@media screen and (max-width: 412px) {
+    .bio {
+        width: 350px;       
+        margin: 20px auto;
+    }
 }
