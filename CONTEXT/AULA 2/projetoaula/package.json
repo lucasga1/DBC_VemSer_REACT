@@ -1,5 +1,5 @@
 {
-  "name": "login",
+  "name": "projetoaula",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,11 +9,9 @@
     "axios": "^0.27.2",
     "create-react-app": "^5.0.1",
     "formik": "^2.2.9",
-    "helper": "^0.0.13",
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-hot-toast": "^2.3.0",
     "react-icons": "^4.4.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",

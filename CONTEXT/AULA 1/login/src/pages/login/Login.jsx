@@ -1,10 +1,10 @@
-import { useFormik } from "formik"
+import { useFormik } from "formik";
 import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext"
+import { AuthContext } from "../../context/AuthContext";
 
 
 function Login() {
-    const { login } = useContext(AuthContext);
+    const { handleLogin } = useContext(AuthContext);
     
     const formik = useFormik({
         initialValues: {
@@ -12,8 +12,8 @@ function Login() {
             senha: ''
         },
         
-        onSubmit: values => {            
-            login(values);
+        onSubmit: value => {            
+            handleLogin(value);                  
         }
     });
     
@@ -31,7 +31,7 @@ function Login() {
             <label htmlFor="senha">Senha:</label>
             <input
                 id="senha"
-                name="senha"
+                name="senha"                                    
                 type='password'
                 onChange={formik.handleChange}
                 value={formik.values.password}

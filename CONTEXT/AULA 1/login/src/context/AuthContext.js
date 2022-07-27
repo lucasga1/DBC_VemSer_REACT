@@ -1,25 +1,65 @@
 import { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import api from '../api';
+import { apiCep, apiDbc } from '../api';
 
 export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
-    
-    const [usuario, setUsuario] = useState(false);
-    
+
+    const [logged, setLogged] = useState(false);
+    const [token, setToken] = useState('');
+    const [dataCep, setDataCep] = useState({});
+
     const navigate = useNavigate();
 
-    const login = async (user) => {
-        const { data } = await api.post('/auth', user);
-
-        localStorage.setItem('token', data);
-        setUsuario(true);
-        navigate('/usuario');
+    const handleLogin = async (value) => {
+        try {
+            const { data } = await apiDbc.post('/auth', value);
+            localStorage.setItem('token', data);
+            setLogged(true);
+            navigate('/pessoas');                
+        } catch (error) {
+            console.log(error)
+            alert('Usuário ou senha inválidos');
+        }
     };
 
+    const handleLogout = () => {
+        localStorage.removeItem('token');
+        verificaToken();
+        navigate('/');
+    };
+
+    const handleSignUp = async (value) => {
+        await apiDbc.post('/auth/create', value);
+        alert('Usuário cadastrado');
+        navigate('/');
+    }
+
+    const verificaToken = () => {
+        const token = localStorage.getItem('token');
+        setToken(token);
+        if (!token) {
+            navigate('/')
+        }
+    }
+
+    const verificaCep = async (value) => {
+        const { data } = await apiCep.get(`/${value}/json`);
+        setDataCep(data);
+    }
+
     return (
-        <AuthContext.Provider value={{ usuario, login }}>
+        <AuthContext.Provider value={{ 
+            logged, 
+            token, 
+            dataCep,            
+            handleLogin, 
+            handleLogout, 
+            handleSignUp, 
+            verificaToken, 
+            verificaCep            
+            }}>
             {children}
         </AuthContext.Provider>
     );
