@@ -13,7 +13,7 @@ function Users() {
     },
 
     onSubmit: value => {
-      handleSignUp(value);
+      handleSignUp(value)
     }
   });
 
@@ -34,7 +34,7 @@ function Users() {
         name="senha"
         type='password'
         onChange={formik.handleChange}
-        value={formik.values.password}
+        value={formik.values.senha}
       />
       <br />
       <button type="submit">Cadastrar</button>
@@ -42,4 +42,4 @@ function Users() {
   )
 
 }
-export default Users;
+export default Users

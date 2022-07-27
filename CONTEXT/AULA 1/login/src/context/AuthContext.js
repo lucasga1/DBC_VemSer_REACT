@@ -17,52 +17,61 @@ function AuthProvider({ children }) {
             const { data } = await apiDbc.post('/auth', value);
             localStorage.setItem('token', data);
             setLogged(true);
-            navigate('/pessoas');                
+            navigate('/pessoas');
         } catch (error) {
             console.log(error)
             alert('Usuário ou senha inválidos');
         }
-    };
+    }
 
     const handleLogout = () => {
         localStorage.removeItem('token');
         verificaToken();
         navigate('/');
-    };
+    }
 
     const handleSignUp = async (value) => {
-        await apiDbc.post('/auth/create', value);
-        alert('Usuário cadastrado');
-        navigate('/');
+        try {
+            await apiDbc.post('/auth/create', value);
+            alert('Usuário cadastrado');
+            navigate('/');
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const verificaToken = () => {
-        const token = localStorage.getItem('token');
-        setToken(token);
+        const dataToken = localStorage.getItem('token');
+        setToken(dataToken);
+        console.log(dataToken)
         if (!token) {
             navigate('/')
         }
     }
 
     const verificaCep = async (value) => {
-        const { data } = await apiCep.get(`/${value}/json`);
-        setDataCep(data);
+        try {
+            const { data } = await apiCep.get(`/${value}/json`);
+            setDataCep(data);
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return (
-        <AuthContext.Provider value={{ 
-            logged, 
-            token, 
-            dataCep,            
-            handleLogin, 
-            handleLogout, 
-            handleSignUp, 
-            verificaToken, 
-            verificaCep            
-            }}>
+        <AuthContext.Provider value={{
+            logged,
+            token,
+            dataCep,
+            handleLogin,
+            handleLogout,
+            handleSignUp,
+            verificaToken,
+            verificaCep
+        }}>
             {children}
         </AuthContext.Provider>
     );
 }
 
-export default AuthProvider;
+export default AuthProvider

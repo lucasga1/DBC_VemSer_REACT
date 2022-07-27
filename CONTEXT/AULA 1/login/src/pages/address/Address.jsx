@@ -5,12 +5,7 @@ import { AuthContext } from "../../context/AuthContext";
 const Address = () => {
 
   const { verificaToken, verificaCep, dataCep } = useContext(AuthContext);
- 
-
-  useEffect(() => {
-    verificaToken();
-  }, [])
-
+  
   const formik = useFormik({
     initialValues: {
       tipo: '',
@@ -23,16 +18,16 @@ const Address = () => {
       pais: ''
     },
     onSubmit: values => {
-      verificaCep(values.cep);
-    },
-  });
-
+      verificaCep(values.cep)
+    }
+  })
+  
   useEffect(() => {
     verificaToken();
   }, [])
-
+  
   return (
-
+    
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor="tipo">Tipo</label>
       <input

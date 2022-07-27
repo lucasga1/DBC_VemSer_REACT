@@ -13,9 +13,9 @@ function Login() {
         },
         
         onSubmit: value => {            
-            handleLogin(value);                  
+            handleLogin(value)                 
         }
-    });
+    })
     
     return (
         <form onSubmit={formik.handleSubmit}>
@@ -34,7 +34,7 @@ function Login() {
                 name="senha"                                    
                 type='password'
                 onChange={formik.handleChange}
-                value={formik.values.password}
+                value={formik.values.senha}
             />
             <br />
             <button type="submit">Entrar</button>

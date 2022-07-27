@@ -4,7 +4,7 @@ import { AuthContext } from "../../context/AuthContext"
 import style from './Menu.module.css'
 
 function Menu() {
-  const { handleLogout, token,  } = useContext(AuthContext)
+  const { handleLogout, token  } = useContext(AuthContext)
   
   return (
     <div className={style.menu}>
