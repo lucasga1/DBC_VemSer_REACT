@@ -23,7 +23,7 @@ function Menu() {
           }
         </ul>
       </nav>
-      <button onClick={handleLogout} on>Sair</button>
+      <button onClick={handleLogout}>Sair</button>
     </div>
   )
 }

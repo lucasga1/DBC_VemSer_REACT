@@ -11,12 +11,11 @@ function Users() {
       login: '',
       senha: ''
     },
-
     onSubmit: value => {
       handleSignUp(value)
     }
   });
-
+  
   return (
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor="login">Usuário:</label>

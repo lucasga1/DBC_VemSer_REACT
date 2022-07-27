@@ -42,11 +42,7 @@ function AuthProvider({ children }) {
 
     const verificaToken = () => {
         const dataToken = localStorage.getItem('token');
-        setToken(dataToken);
-        console.log(dataToken)
-        if (!token) {
-            navigate('/')
-        }
+        setToken(dataToken);       
     }
 
     const verificaCep = async (value) => {

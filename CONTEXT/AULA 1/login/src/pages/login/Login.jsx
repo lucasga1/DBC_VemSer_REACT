@@ -10,8 +10,7 @@ function Login() {
         initialValues: {
             login: '',
             senha: ''
-        },
-        
+        },        
         onSubmit: value => {            
             handleLogin(value)                 
         }
