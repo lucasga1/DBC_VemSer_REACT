@@ -2,6 +2,7 @@ import { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { apiCep, apiDbc } from '../api';
 
+
 export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
@@ -42,7 +43,7 @@ function AuthProvider({ children }) {
 
     const verificaToken = () => {
         const dataToken = localStorage.getItem('token');
-        setToken(dataToken);       
+        setToken(dataToken);
     }
 
     const verificaCep = async (value) => {

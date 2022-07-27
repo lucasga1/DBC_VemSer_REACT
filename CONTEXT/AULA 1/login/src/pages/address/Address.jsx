@@ -1,11 +1,13 @@
 import { useFormik } from "formik";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { IMaskInput } from "react-imask";
 
 const Address = () => {
 
   const { verificaToken, verificaCep, dataCep } = useContext(AuthContext);
-  
+  const [cep, setCep] = useState({})
+
   const formik = useFormik({
     initialValues: {
       tipo: '',
@@ -17,17 +19,24 @@ const Address = () => {
       estado: '',
       pais: ''
     },
-    onSubmit: values => {
-      verificaCep(values.cep)
+
+    onSubmit: (values) => {
+      setCep(values.cep)      
+
+      const cepSemPonto = cep.split('.');
+      const cepSemTraco = cepSemPonto[1].split('-')
+      const cepFormatado = cepSemPonto[0] + cepSemTraco[0] + cepSemTraco[1];
+      
+      verificaCep(cepFormatado);      
     }
   })
-  
+
   useEffect(() => {
     verificaToken();
   })
-  
+
   return (
-    
+
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor="tipo">Tipo</label>
       <input
@@ -48,7 +57,7 @@ const Address = () => {
         onChange={formik.handleChange}
         value={dataCep.logradouro}
       />
-      <br/>
+      <br />
       <label htmlFor="numero">Número</label>
       <input
         id="numero"
@@ -70,7 +79,8 @@ const Address = () => {
       />
       <br />
       <label htmlFor="cep">CEP</label>
-      <input
+      <IMaskInput
+        mask="00.000-000"
         id="cep"
         name="cep"
         type="text"
