@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-
+import { Li } from "./Item.styled"
 function Item({ value, url }) {
   return (
-    <li><Link to={url} >{value}</Link></li>
+    <Li><Link to={url} >{value}</Link></Li>
   )
 }
 export default Item;

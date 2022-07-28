@@ -1,7 +1,7 @@
 import Item from "./Item"
 import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext"
-import {} from "./Menu.styled"
+import { MenuDiv } from "./Menu.styled"
 
 function Menu() {
   const { handleLogout, auth } = useContext(AuthContext)
