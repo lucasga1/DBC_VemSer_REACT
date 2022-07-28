@@ -4,7 +4,7 @@ export const Container = styled.div`
 width: 380px;
 height: 582px;
 border-radius: 8px;
-background-color: lightgreen;
+background-color: #f3f3f3;
 display: flex;
 flex-flow: column nowrap;
 align-items: center;
