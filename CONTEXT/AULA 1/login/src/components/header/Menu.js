@@ -1,13 +1,13 @@
 import Item from "./Item"
 import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext"
-import style from './Menu.module.css'
+import {} from "./Menu.styled"
 
 function Menu() {
   const { handleLogout, auth } = useContext(AuthContext)
   
   return (
-    <div className={style.menu}>
+    <div>
       <nav>
         <ul >
           { !auth
