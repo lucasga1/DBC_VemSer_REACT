@@ -5,22 +5,34 @@ import Users from "./pages/users/Users"
 import People from "./pages/people/People"
 import Address from "./pages/address/Address"
 import Footer from "./components/footer/Footer"
-import AuthContext from "./context/AuthContext.js"
+import NotFound from "./pages/notFound/NotFound"
+import AuthProvider, { AuthContext } from "./context/AuthContext.js"
+import { useContext } from "react"
 
 function Routers() {
+    const { auth } = useContext(AuthContext)
+
     return (
         <BrowserRouter>
-            <AuthContext>
+            <AuthProvider>
                 <Header />
                 <Routes>
-                    <Route path='/' element={<Login />}></Route>
-                    <Route path='/usuarios' element={<Users />}></Route>
-                    <Route path='/pessoas' element={<People />}></Route>
-                    <Route path='/endereco' element={<Address />}></Route>
+                    {!auth ? (
+                        <>
+                            <Route path='/' element={<Login />}></Route>
+                            <Route path='/usuarios' element={<Users />}></Route>
+                        </>) : (
+                        <>
+                            <Route path='/pessoas' element={<People />}></Route>
+                            <Route path='/endereco' element={<Address />}></Route>
+                        </>
+                    )}
+
+                    <Route path='*' element={<NotFound />}></Route>
                 </Routes>
                 <Footer />
-            </AuthContext>
-        </BrowserRouter>
+            </AuthProvider>
+        </BrowserRouter >
     )
 }
 export default Routers

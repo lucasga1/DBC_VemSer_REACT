@@ -4,13 +4,13 @@ import { AuthContext } from "../../context/AuthContext"
 import style from './Menu.module.css'
 
 function Menu() {
-  const { handleLogout, token  } = useContext(AuthContext)
+  const { handleLogout, auth } = useContext(AuthContext)
   
   return (
     <div className={style.menu}>
       <nav>
         <ul >
-          { !token
+          { !auth
             ? <>
               <Item value='Login' url='/' />
               <Item value='Usuários' url='/usuarios' />
@@ -23,7 +23,7 @@ function Menu() {
           }
         </ul>
       </nav>
-      <button onClick={handleLogout}>Sair</button>
+      {auth && <button onClick={handleLogout}>Sair</button>}
     </div>
   )
 }

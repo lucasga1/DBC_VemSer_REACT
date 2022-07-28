@@ -4,18 +4,19 @@ import { AuthContext } from "../../context/AuthContext";
 
 function Users() {
 
-  const {handleSignUp} = useContext(AuthContext);
+  const { handleSignUp } = useContext(AuthContext);
 
   const formik = useFormik({
     initialValues: {
       login: '',
       senha: ''
     },
+
     onSubmit: value => {
       handleSignUp(value)
     }
   });
-  
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <label htmlFor="login">Usuário:</label>

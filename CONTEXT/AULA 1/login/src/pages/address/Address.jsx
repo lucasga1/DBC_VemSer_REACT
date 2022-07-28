@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
-import { useEffect, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
 import { IMaskInput } from "react-imask";
 
 const Address = () => {
 
-  const { verificaToken, verificaCep, dataCep } = useContext(AuthContext);
+  const { verificaCep, dataCep } = useContext(AuthContext);
   const [cep, setCep] = useState({})
 
   const formik = useFormik({
@@ -30,11 +30,6 @@ const Address = () => {
       verificaCep(cepFormatado);      
     }
   })
-
-  useEffect(() => {
-    verificaToken();
-  })
-
   return (
 
     <form onSubmit={formik.handleSubmit}>

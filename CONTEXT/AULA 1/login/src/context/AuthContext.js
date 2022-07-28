@@ -1,5 +1,4 @@
-import { createContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { createContext, useState, useEffect } from 'react';
 import { apiCep, apiDbc } from '../api';
 
 
@@ -7,18 +6,26 @@ export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
 
-    const [logged, setLogged] = useState(false);
-    const [token, setToken] = useState('');
+    const [auth, setAuth] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [dataCep, setDataCep] = useState({});
 
-    const navigate = useNavigate();
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            apiDbc.defaults.headers.common['Authorization'] = token;
+            setAuth(true);
+        }
+        setLoading(false);
+    }, [])
 
     const handleLogin = async (value) => {
         try {
             const { data } = await apiDbc.post('/auth', value);
             localStorage.setItem('token', data);
-            setLogged(true);
-            navigate('/pessoas');
+            apiDbc.defaults.headers.common['Authorization'] = data;
+            setAuth(true);
+            window.location.href = '/pessoas'
         } catch (error) {
             console.log(error)
             alert('Usuário ou senha inválidos');
@@ -27,23 +34,19 @@ function AuthProvider({ children }) {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
-        verificaToken();
-        navigate('/');
+        apiDbc.defaults.headers.common['Authorization'] = undefined;
+        setAuth(false);
+        window.location.href = '/'
     }
 
     const handleSignUp = async (value) => {
         try {
             await apiDbc.post('/auth/create', value);
             alert('Usuário cadastrado');
-            navigate('/');
+            window.location.href = '/'
         } catch (error) {
             console.log(error)
         }
-    }
-
-    const verificaToken = () => {
-        const dataToken = localStorage.getItem('token');
-        setToken(dataToken);
     }
 
     const verificaCep = async (value) => {
@@ -54,17 +57,24 @@ function AuthProvider({ children }) {
             console.log(error)
         }
     }
+    
+    if(loading){
+        return (
+            <div>
+                Carregando Pagina - Loading
+            </div>
+        )
+    }
 
     return (
         <AuthContext.Provider value={{
-            logged,
-            token,
+            auth,
             dataCep,
+            setAuth,
             handleLogin,
             handleLogout,
             handleSignUp,
-            verificaToken,
-            verificaCep
+            verificaCep            
         }}>
             {children}
         </AuthContext.Provider>
