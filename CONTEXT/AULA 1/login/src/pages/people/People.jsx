@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { apiDbc } from '../../api';
 import { Formik, Form, Field } from 'formik';
-
+import { Popconfirm, Modal } from 'antd';
+import 'antd/dist/antd.css';
 
 function People() {
   const [buscaPessoas, setBuscaPessoas] = useState([])
@@ -18,7 +19,6 @@ function People() {
       console.log(error)
     }
   }
-
   useEffect(() => {
     setup();
   }, [])
@@ -58,10 +58,24 @@ function People() {
     setIsUpdate(verdadeiro)
   }
 
+  const info = () => {
+    if (isUpdate) {
+      Modal.info({
+        title: 'Usuário atualizado com sucesso!',
+        onOk() { },
+      });
+    } else {
+      Modal.info({
+        title: 'Usuário cadastrado com sucesso!',
+        onOk() { },
+      });
+    }
+  };
 
   return (
     <div>
       <h1>Pessoas</h1>
+
       <Formik
         initialValues={{
           nome: '',
@@ -94,7 +108,7 @@ function People() {
             <Field name='email' placeholder='Digite seu e-mail' />
             {errors.email && touched.email ? (<div>{errors.email}</div>) : null}
 
-            <button type='submit'>{isUpdate ? 'Atualizar' : 'Cadastrar'}</button>
+            <button type='submit' onClick={info}>{isUpdate ? 'Atualizar' : 'Cadastrar'}</button>
           </Form>
         )}
 
@@ -109,9 +123,16 @@ function People() {
             <p>Data de nascimento: {dataNascimento}</p>
             <p>CPF: {cpf}</p>
             <p>Email: {email}</p>
-            <button onClick={setup}>AtualizaLista</button>
+
             <button onClick={() => alteraValor(idPessoa, true)}>Atualizar</button>
-            <button onClick={() => handleDelete(idPessoa)}>Excluir</button>
+            <Popconfirm
+              title="Deseja excluir essa pessoa? Não será possível desfazer está acão!"
+              onConfirm={() => handleDelete(idPessoa)}
+              onVisibleChange={() => console.log('visible change')}
+            >
+              <button type="primary" >Excluir</button>
+            </Popconfirm>
+
           </div>
         ))}
       </div>
