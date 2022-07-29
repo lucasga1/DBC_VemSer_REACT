@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Li = styled.li`
-display: inline;
-justify-content: end;
+list-style: none; 
 font-size: 18px;
 padding: 15px
 `;

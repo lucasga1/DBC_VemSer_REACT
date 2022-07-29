@@ -1,36 +1,33 @@
 import styled from "styled-components"
 
-export const Container = styled.div`
-width: 380px;
-height: 582px;
-border-radius: 8px;
-background-color: lightgreen;
+export const Container= styled.div`
 display: flex;
-flex-flow: column nowrap;
-align-items: center;
-margin: 0 auto;
-`;
-
-export const Dashboard = styled.div`
-display: flex;
-flex-direction: column;
+flex-direction: column; 
 justify-content: center;
 align-items: center;
 width: 380px;
-heigth: 60px;
+height: 580px;
+margin: 0 auto;
+border-radius: 8px;
+background-color: #f3f3f3;
+`;
+
+export const Div = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+`;
+
+export const Dashboard = styled.div`
+text-align: center;
 margin-top: 40px;
-background-color: lightblue;
+
 `;
 
 export const Logo = styled.div`
 background-color: #fff
 font-size: 60px;
-`;
-
-export const SubscribeDash = styled.h2`
-color:#9FA2B4;
-font-size: 19px;
-font-weight: 700;
 `;
 
 export const Title = styled.h1`
@@ -40,33 +37,54 @@ font-size: 24px;
 font-weight: 700;
 `;
 
+export const SubscribeDash = styled.h2`
+color:#9FA2B4;
+font-size: 19px;
+font-weight: 700;
+margin-top: 12px;
+`;
+
+
 export const Subscribe = styled.h2`
 color:#9FA2B4;
 font-size: 14px;
 font-weight: 400;
+margin-top: 12px;
 `;
 
 export const Label = styled.label`
+margin: 10px 0 6px 0;
 text-transform: uppercase;
 font-size: 12px;
+font-weight: 700;
 color: #9FA2B4;
 `;
 
-export const Inputs = styled.input`
+export const Inputs = styled.div`
+&{ 
 display: grid;
 width: 316px;
 heigth: 42px;
+padding: 10px;
 border: none;
+}
 `;
 
-export const Button = styled.button`
-width: 316px;
-heigth: 48px;
-background: #3751FF;
-box-shadow: 0px 4px 12px rgba(55, 81, 255, 0.24);
-border: none;
-border-radius: 8px;
+export const P = styled.p`
 font-size: 14px;
-color: white;
-margin-top: 24px;
+color: #9FA2B4;
+text-align: center;
+margin-top: 32px;
+`;
+
+export const SpanSignup = styled.span`
+color: #3751FF;
+padding-left: 5px;
+`;
+
+export const SpanForgot = styled.span`
+font-size: 10px;
+font-weight: 400;
+color: #9FA2B4;
+padding-left: 142px;
 `;

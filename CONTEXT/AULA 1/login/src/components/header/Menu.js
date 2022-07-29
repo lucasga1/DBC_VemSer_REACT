@@ -1,7 +1,7 @@
 import Item from "./Item"
 import { useContext } from "react"
 import { AuthContext } from "../../context/AuthContext"
-import { MenuDiv } from "./Menu.styled"
+import { ButtonPrimary } from "../button/ButtonPrimary"
 
 function Menu() {
   const { handleLogout, auth } = useContext(AuthContext)
@@ -18,12 +18,13 @@ function Menu() {
             :
             <>
               <Item value='Pessoas' url='/pessoas' />
+              <Item value='Cadastro Pessoas' url='/cadastra-pessoa' />
               <Item value='Endereço' url='/endereco' />
             </>
           }
         </ul>
       </nav>
-      {auth && <button onClick={handleLogout}>Sair</button>}
+      {auth && <ButtonPrimary width="380" onClick={handleLogout} >Sair</ButtonPrimary> }
     </div>
   )
 }

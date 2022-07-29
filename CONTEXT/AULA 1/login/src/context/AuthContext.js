@@ -22,7 +22,7 @@ function AuthProvider({ children }) {
     const handleLogin = async (value) => {
         try {
             const { data } = await apiDbc.post('/auth', value);
-            localStorage.getItem('token', data);
+            localStorage.setItem('token', data);
             apiDbc.defaults.headers.common['Authorization'] = data;
             setAuth(true);
             window.location.href = '/pessoas'
