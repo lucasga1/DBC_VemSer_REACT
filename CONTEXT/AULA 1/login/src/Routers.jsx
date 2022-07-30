@@ -12,18 +12,18 @@ import PeopleProvider from "./context/PeopleContext"
 import Footer from "./components/footer/Footer"
 
 function Routers() {
-    
+
     const { auth } = useContext(AuthContext)
 
     return (
         <BrowserRouter>
             <AuthProvider>
                 <PeopleProvider>
-                    <Header />
+                    {!auth ? '' : <Header />}
                     <Routes>
                         {!auth ? (
                             <>
-                                <Route path='/' element={<Login />}></Route>
+                                <Route path='/' element={<Login />} style={{backgroundColor: 'gray'}}></Route>
                                 <Route path='/usuarios' element={<Users />}></Route>
                             </>) : (
                             <>

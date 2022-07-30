@@ -2,7 +2,7 @@ import { Form, Field, Formik } from "formik";
 import { useContext } from "react";
 import { FaEarlybirds } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
-import { Inputs, Title, Label, Subscribe, Logo, Dashboard, SubscribeDash, Container, Div, P, SpanSignup, SpanForgot } from "./Login.styled";
+import { Inputs, Title, Subscribe, Logo, Dashboard, SubscribeDash, Container, Div, Link, SpanSignup, SpanForgot, Errors, BgBody } from "./Login.styled";
 import { ButtonPrimary } from "../../components/button/ButtonPrimary";
 import * as Yup from 'yup';
 
@@ -13,54 +13,58 @@ function Login() {
         login: Yup.string()
             .min(2, 'Muito curta')
             .max(50, 'Muito longo')
-            .required('Preenchimento Obrigatório'),
+            .required('Required field'),
         senha: Yup.string()
             .min(2, 'Muito curta')
             .max(50, 'Muito longo')
-            .required('Preenchimento Obrigatório')
+            .required('Required field')
     })
 
     return (
+        <BgBody>
+            <Container>
+                <Dashboard>
+                    <Logo><FaEarlybirds style={{ fontSize: '40px', color: '#3751FF' }} /></Logo>
+                    <SubscribeDash>Dashboard Kit</SubscribeDash>
+                </Dashboard>
+                <Div>
+                    <Title>Log In to Dashboard Kit</Title>
+                    <Subscribe>Enter your email and password bellow</Subscribe>
+                </Div>
+                <Div>
+                    <Formik
+                        initialValues={{
+                            login: '',
+                            senha: '',
+                        }}
+                        validationSchema={SignupSchema}
+                        onSubmit={values => {
+                            handleLogin(values);
+                        }}
 
-        <Container>
-            <Dashboard>
-                <Logo><FaEarlybirds style={{ fontSize: '40px' }} /></Logo>
-                <SubscribeDash>Dashboard Kit</SubscribeDash>
-            </Dashboard>
-            <Div>
-                <Title>Log In to Dashboard Kit</Title>
-                <Subscribe>Enter your email and password bellow</Subscribe>
-            </Div>
-            <Div>
-                <Formik
-                    initialValues={{
-                        login: '',
-                        senha: '',
-                    }}
-                    validationSchema={SignupSchema}
-                    onSubmit={values => {
-                        handleLogin(values);
-                    }}
-
-                >
-                    {({ errors, touched }) => (
-                        <Form>
-                            <Inputs>
-                                <Label htmlFor="login">EMAIL</Label>
-                                <Field name="login" placeholder="Digite seu usuário" />
-                                {errors.login && touched.login ? (<div>{errors.login}</div>) : null}
-                                <Label htmlFor="password">PASSWORD<SpanForgot>Forgot password?</SpanForgot></Label>
-                                <Field name="senha" type="password" placeholder="Digite sua senha" />
-                                {errors.login && touched.login ? (<div>{errors.login}</div>) : null}
-                            <ButtonPrimary type="submit" width="380">Login</ButtonPrimary>
-                            </Inputs>
-                        </Form>
-                    )}
-                </Formik>
-                <P>Don,t have an acount?<SpanSignup>Sign up</SpanSignup></P>
-            </Div>
-        </Container>
-
+                    >
+                        {({ errors, touched }) => (
+                            <Form>
+                                <Inputs>
+                                    <label htmlFor="login">EMAIL</label>
+                                    <Field name="login" placeholder="Email address" />
+                                    <Errors>
+                                        {errors.login && touched.login ? (<p>{errors.login}</p>) : null}
+                                    </Errors>
+                                    <label htmlFor="password">PASSWORD<SpanForgot>Forgot password?</SpanForgot></label>
+                                    <Field name="senha" type="password" placeholder="Password" />
+                                    <Errors>
+                                        {errors.senha && touched.senha ? (<p>{errors.senha}</p>) : null}
+                                    </Errors>
+                                </Inputs>
+                                <ButtonPrimary type="submit" width="380">Login</ButtonPrimary>
+                            </Form>
+                        )}
+                    </Formik>
+                    <SpanSignup>Don,t have an acount?<Link href='/usuarios'>Sign up</Link></SpanSignup>
+                </Div>
+            </Container>
+        </BgBody>
     )
 }
 

@@ -1,14 +1,15 @@
 import { FaEarlybirds } from "react-icons/fa";
 import Menu from "./Menu";
 import { Link } from "react-router-dom";
-import { HeaderDiv, Logo } from "./Header.styled"
+import { DivLogo, HeaderDiv, Logo } from "./Header.styled"
 
 function Header() {
   return (
     <HeaderDiv>
-      <Logo>
-        <Link to='/'><FaEarlybirds style={{ fontSize: '60' }} /></Link>
-      </Logo>
+      <DivLogo>
+        <Logo><Link to='/'><FaEarlybirds style={{ fontSize: '35', color: '#3751FF' }} /></Link></Logo>
+        <h1>Dashboard Kit</h1>
+      </DivLogo>
       <Menu />
     </HeaderDiv>
   )

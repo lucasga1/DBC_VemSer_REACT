@@ -2,66 +2,91 @@ import { Form, Field, Formik } from "formik";
 import { useContext } from "react";
 import { FaEarlybirds } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
-import { Inputs, Title, Label, Subscribe, Logo, Dashboard, SubscribeDash, Container, Div, P, SpanSignup, SpanForgot } from "./Users.styled";
-import { ButtonPrimary } from "../../components/button/ButtonPrimary";
+import { Inputs, Title, Subscribe, Logo, Dashboard, SubscribeDash, Container, Div, BgBody, Link, SpanSignup, SpanForgot, Errors } from "./Users.styled";
+import { ButtonPrimary } from '../../components/button/ButtonPrimary'
+
+import { Button, Modal, Space } from 'antd';
+import React from 'react';
 import * as Yup from "yup"
 
 
 function Users() {
 
-  const { handleSignUp } = useContext(AuthContext);
+    const { handleSignUp } = useContext(AuthContext);
 
-  const SignupSchema = Yup.object().shape({
-    login: Yup.string()
-        .min(2, 'Muito curta')
-        .max(50, 'Muito longo')
-        .required('Preenchimento Obrigatório'),
-    senha: Yup.string()
-        .min(2, 'Muito curta')
-        .max(50, 'Muito longo')
-        .required('Preenchimento Obrigatório')
-})
+    const SignupSchema = Yup.object().shape({
+        login: Yup.string()
+            .min(2, 'Muito curta')
+            .max(50, 'Muito longo')
+            .required('Preenchimento Obrigatório'),
+        senha: Yup.string()
+            .min(2, 'Muito curta')
+            .max(50, 'Muito longo')
+            .required('Preenchimento Obrigatório')
+    })
 
-  return (
-    <Container>
-            <Dashboard>
-                <Logo><FaEarlybirds style={{ fontSize: '40px' }} /></Logo>
-                <SubscribeDash>Dashboard Kit</SubscribeDash>
-            </Dashboard>
-            <Div>
-                <Title>Log In to Dashboard Kit</Title>
-                <Subscribe>Enter your email and password bellow</Subscribe>
-            </Div>
-            <Div>
-                <Formik
-                    initialValues={{
-                        login: '',
-                        senha: '',
-                    }}
-                    validationSchema={SignupSchema}
-                    onSubmit={values => {
-                        handleSignUp(values);
-                    }}
+    const info = () => {
+        Modal.info({
+          title: 'This is a notification message',
+          content: (
+            <div>
+              <p>some messages...some messages...</p>
+              <p>some messages...some messages...</p>
+            </div>
+          ),
+      
+          onOk() {},
+        });
+      };
 
-                >
-                    {({ errors, touched }) => (
-                        <Form>
-                            <Inputs>
-                                <Label htmlFor="login">EMAIL</Label>
-                                <Field name="login" placeholder="Digite seu usuário" />
-                                {errors.login && touched.login ? (<div>{errors.login}</div>) : null}
-                                <Label htmlFor="password">PASSWORD<SpanForgot>Forgot password?</SpanForgot></Label>
-                                <Field name="senha" placeholder="Digite sua senha" />
-                                {errors.login && touched.login ? (<div>{errors.login}</div>) : null}
-                            <ButtonPrimary type="submit">Sign In</ButtonPrimary>
-                            </Inputs>
-                        </Form>
-                    )}
-                </Formik>
-                <P>Don,t have an acount?<SpanSignup>Sign up</SpanSignup></P>
-            </Div>
-        </Container>
-  )
+    return (
+        <BgBody>
+            <Container>
+                <Dashboard>
+                    <Logo><a href='/'><FaEarlybirds style={{ fontSize: '40px', color: '#3751FF' }} /></a></Logo>
+                    <SubscribeDash>Dashboard Kit</SubscribeDash>
+                </Dashboard>
+                <Div>
+                    <Title>Log In to Dashboard Kit</Title>
+                    <Subscribe>Enter your email and password bellow</Subscribe>
+                </Div>
+                <Div>
+                    <Formik
+                        initialValues={{
+                            login: '',
+                            senha: '',
+                        }}
+                        validationSchema={SignupSchema}
+                        onSubmit={values => {
+                            handleSignUp(values);                            
+                        }}
+
+                    >
+                        {({ errors, touched }) => (
+                            <Form>
+                                <Inputs>
+                                    <label htmlFor="login">EMAIL</label>
+                                    <Field name="login" placeholder="Email address" />
+                                    <Errors>
+                                        {errors.login && touched.login ? (<p>{errors.login}</p>) : null}
+                                    </Errors>
+                                    <label htmlFor="password">PASSWORD<SpanForgot>Forgot password?</SpanForgot></label>
+                                    <Field name="senha" type="password" placeholder="Password" />
+                                    <Errors>
+                                        {errors.senha && touched.senha ? (<p>{errors.senha}</p>) : null}
+                                    </Errors>
+                                </Inputs>
+                               
+                                    <ButtonPrimary type="submit" width="380">Create Account</ButtonPrimary>
+                               
+                            </Form>
+                        )}
+                    </Formik>
+                    <SpanSignup>Don,t have an acount?<Link href='/usuarios'>Sign up</Link></SpanSignup>
+                </Div>
+            </Container>
+        </BgBody >
+    )
 
 }
 export default Users

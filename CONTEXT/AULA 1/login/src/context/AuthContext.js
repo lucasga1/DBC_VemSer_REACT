@@ -1,7 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import { apiCep, apiDbc } from '../api';
 
-
 export const AuthContext = createContext();
 
 function AuthProvider({ children }) {
@@ -42,8 +41,8 @@ function AuthProvider({ children }) {
     const handleSignUp = async (value) => {
         try {
             await apiDbc.post('/auth/create', value);
-            alert('Usuário cadastrado');
             window.location.href = '/'
+           
         } catch (error) {
             console.log(error)
         }

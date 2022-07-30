@@ -11,13 +11,14 @@ function PeopleList() {
     <>
       {buscaPessoas.map(({ nome, dataNascimento, cpf, email, idPessoa }) => (
         <Pessoa key={idPessoa}>
-          <li>{nome}</li>
+          <div>
+          <li><img src="../../imagens/visitors (5).png" alt="Lucas" />{nome}</li>
           <li>{dataNascimento}</li>
           <li>{cpf}</li>
           <li>{email}</li>
           <button onClick={() => irParaUpdate(idPessoa)}>Atualizar</button>
           <button onClick={() => handleDelete(idPessoa)} >Excluir</button>
-
+          </div>
         </Pessoa>
       ))}
     </>
