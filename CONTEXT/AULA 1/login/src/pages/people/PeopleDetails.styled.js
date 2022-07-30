@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Container = styled.div`
 position: relative;
 max-width: 1200px;
-margin-left: 21%;
+margin-left: 280px;
 display: grid;
 grid-template-columns: 1fr 2fr;
 `;
@@ -60,4 +60,4 @@ export const ButtonsBarraUsuario = styled.div`
 &{
     margin-left: 10px;
 }
-    `;
+`;

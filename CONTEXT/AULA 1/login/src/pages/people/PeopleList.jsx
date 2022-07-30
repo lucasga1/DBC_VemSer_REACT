@@ -4,7 +4,7 @@ import { Pessoa } from './PeopleList.styled';
 
 function PeopleList() {
 
-  const { buscaPessoas, alteraValor, handleDelete } = useContext(PeopleContext)
+  const { buscaPessoas, irParaUpdate, handleDelete } = useContext(PeopleContext)
 
   return (
 
@@ -15,8 +15,8 @@ function PeopleList() {
           <li>{dataNascimento}</li>
           <li>{cpf}</li>
           <li>{email}</li>
-          <button onClick={() => alteraValor(idPessoa, true)}>Atualizar</button>
-          <button type="primary" onClick={() => handleDelete(idPessoa)} >Excluir</button>
+          <button onClick={() => irParaUpdate(idPessoa)}>Atualizar</button>
+          <button onClick={() => handleDelete(idPessoa)} >Excluir</button>
 
         </Pessoa>
       ))}

@@ -70,6 +70,8 @@ function AuthProvider({ children }) {
         <AuthContext.Provider value={{
             auth,
             dataCep,
+            loading,
+            setLoading,
             setAuth,
             handleLogin,
             handleLogout,

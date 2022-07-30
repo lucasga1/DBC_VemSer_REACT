@@ -1,22 +1,18 @@
 import { createContext, useState, useEffect } from 'react';
 import { apiDbc } from '../api';
-import { useNavigate } from 'react-router-dom';
-import InputMask from 'react-input-mask';
 
 export const PeopleContext = createContext();
 
 function PeopleProvider({ children }) {
-    
-    const navigate = useNavigate()
+
     const [buscaPessoas, setBuscaPessoas] = useState([])
     const [isUpdate, setIsUpdate] = useState(false)
-    const [id, setId] = useState([])
+    const [user, setUser] = useState([])
 
     async function setup() {
         try {
             const { data } = await apiDbc.get('/pessoa?pagina=0&tamanhoDasPaginas=20')
             setBuscaPessoas(data.content)
-
         } catch (error) {
             console.log(error)
         }
@@ -24,14 +20,23 @@ function PeopleProvider({ children }) {
 
     useEffect(() => {
         setup();
-    }, [])
+        }, [])
+
+    const getPessoaId = async (id) => {
+        console.log(id)
+        try {
+            const { data } = await apiDbc.get(`/pessoa/lista-completa?idPessoa=${id}`)
+            setUser(data[0])
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     const handleCreateUser = async (value) => {
         try {
-            const data = await apiDbc.post('/pessoa', value);
-            console.log(data.content)
+            await apiDbc.post('/pessoa', value);            
             setup()
-            navigate('/pessoas')
+            window.location.href = '/pessoas'
         } catch (error) {
             console.log(error);
         }
@@ -39,76 +44,47 @@ function PeopleProvider({ children }) {
 
     const mudaPagina = () => {
         setIsUpdate(false)
-        navigate('/cadastra-pessoa')
+        window.location.href = '/cadastra-pessoa'
     }
 
-    const handleDelete = async (value) => {
+    const handleDelete = async (id) => {
         try {
-            const data = await apiDbc.delete(`/pessoa/${value}`)
-            console.log(data.content)
+            await apiDbc.delete(`/pessoa/${id}`)
             setup()
         } catch (error) {
             console.log(error)
         }
     }
 
-    const handleUpdate = async (value) => {
+    const handleUpdate = async (value, id) => {
         try {
-            const data = await apiDbc.put(`/pessoa/${id}`, value)
-            console.log(data.content)
-            console.log(id)
+            await apiDbc.put(`/pessoa/${id}`, value)
             setup()
-            navigate('/pessoas')
+            
+            window.location.href = '/pessoas'
         } catch (error) {
             console.log(error)
         }
     }
 
-    const alteraValor = (value, verdadeiro) => {
-        navigate(`/atualiza-pessoa/${value}`)
-        setId(value)
-        setIsUpdate(verdadeiro)
-
+    const irParaUpdate = (idPessoa) => {
+        window.location.href = `/atualiza-pessoa/${idPessoa}`
     }
 
-    //Masks
-    function DataNascimento(props) {
         return (
-            <InputMask
-                placeholder='Digite sua data de nascimento'
-                mask='99/99/9999'
-                value={props.value}
-                onChange={props.onChange}>
-            </InputMask>
-        );
-    }
-
-    function Cpf(props) {
-        return (
-            <InputMask
-                placeholder='Digite seu cpf'
-                mask='999.999.999-99'
-                value={props.value}
-                onChange={props.onChange}>
-            </InputMask>
-        );
-    }
-
-    return (
         <>
             <PeopleContext.Provider value={{
-                
+
                 buscaPessoas,
                 isUpdate,
-                setId,
+                user,
                 setIsUpdate,
                 handleCreateUser,
                 handleUpdate,
                 handleDelete,
-                alteraValor,
+                irParaUpdate,
                 mudaPagina,
-                DataNascimento,
-                Cpf
+                getPessoaId
             }}>
                 {children}
             </PeopleContext.Provider>

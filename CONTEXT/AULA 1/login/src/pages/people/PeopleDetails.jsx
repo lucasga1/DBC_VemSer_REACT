@@ -23,7 +23,7 @@ function PeopleDetails() {
                             </ButtonsBarraUsuario>
                             <PerfilUsuario>
                                 <h3>Nome Usuario</h3>
-                                <p><FaGrinAlt /></p>
+                                <img src="../../imagens/cogumelo1.png" alt="" />
                             </PerfilUsuario>
                         </DivFlex>
 
