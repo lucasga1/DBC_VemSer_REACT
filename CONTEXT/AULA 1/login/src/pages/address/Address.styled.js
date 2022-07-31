@@ -10,7 +10,6 @@ height: 100%;
 
 & > div {
     text-align: center;
-    margin-top: 20px;
     & h1{
         font-size: 24px;
     }
@@ -18,15 +17,19 @@ height: 100%;
 `;
 
 export const DivForm = styled.div`
+border:  2px solid #DFE0EB;
+border-radius: 8px;
+margin: 0 auto;
+padding: 20px;
+
+& form {
 display: flex;
 flex-direction: column;
 width: 800px;
-margin: 20px auto 20px auto;
-padding: 20px;
-border:  2px solid #DFE0EB;
-border-radius: 8px;
+}
 
 & label {
+    text-align: left;
     color: #252733;
     font-size: 16px;
     font-weight: 700;
@@ -51,9 +54,4 @@ border-radius: 8px;
     background-color: #E5E5E5;
 }
 
-& div {
-    display: flex;
-    justify-content: space-evenly;
-    margin-top: 10px;
-}
 `;

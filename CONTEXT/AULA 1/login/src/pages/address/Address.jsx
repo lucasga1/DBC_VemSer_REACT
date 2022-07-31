@@ -1,5 +1,6 @@
 import { Formik } from "formik";
-import { useContext, useEffect, useState } from "react";
+import { useContext, } from "react";
+import { useParams } from "react-router-dom";
 import { ButtonSecundary } from "../../components/button/ButtonPrimary";
 import { AddressContext } from "../../context/AddressContext";
 import { ContainerForm, DivForm } from "./Address.styled";
@@ -7,29 +8,36 @@ import { ContainerForm, DivForm } from "./Address.styled";
 const Address = () => {
 
   const { verificaCep, handleCreateAddress, dataCep } = useContext(AddressContext);
- 
-
-  if(!dataCep){
+  const { id } = useParams()
+  if (!dataCep) {
     return
   }
-
   return (
     <Formik
       initialValues={{
         tipo: '',
-        logradouro: dataCep.logradouro ? dataCep.logradouro : '',
+        logradouro: '',
         numero: '',
         complemento: '',
         cep: '',
-        cidade: dataCep.localidade ? dataCep.localidade : '',
-        estado: dataCep.uf ? dataCep.uf : '',
+        cidade: '',
+        estado: '',
         pais: ''
       }}
       onSubmit={(values) => {
-        
-        if (verificaCep(values.cep)) {
-          console.log(dataCep)
+        const enviaApi = {
+          idPessoa: parseInt(id),
+          tipo: values.tipo.toUpperCase(),
+          logradouro: dataCep.logradouro,
+          numero: parseInt(values.numero),
+          complemento: values.complemento,
+          cep: values.cep,
+          cidade: dataCep.localidade,
+          estado: dataCep.uf,
+          pais: values.pais
         }
+        console.log(enviaApi)
+        handleCreateAddress(enviaApi)
       }}
     >
 
@@ -38,8 +46,8 @@ const Address = () => {
           <div>
             <h1>Insira seus dados do seu endereço</h1>
           </div>
-          <form onSubmit={props.handleSubmit}>
-            <DivForm>
+          <DivForm>
+            <form onSubmit={props.handleSubmit}>
               <label htmlFor="tipo">Tipo</label>
               <input
                 id="tipo"
@@ -49,7 +57,6 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={props.values.tipo}
               />
-              <br />
               <label htmlFor="logradouro">Logradouro</label>
               <input
                 id="logradouro"
@@ -59,7 +66,6 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={dataCep.logradouro}
               />
-              <br />
               <label htmlFor="numero">Número</label>
               <input
                 id="numero"
@@ -69,7 +75,6 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={props.values.numero}
               />
-              <br />
               <label htmlFor="complemento">Complemento</label>
               <input
                 id="complemento"
@@ -79,7 +84,6 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={props.values.complemento}
               />
-              <br />
               <label htmlFor="cep">CEP</label>
               <input
                 id="cep"
@@ -89,7 +93,6 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={props.values.cep}
               />
-              <br />
               <label htmlFor="cidade">Cidade</label>
               <input
                 id="cidade"
@@ -99,7 +102,6 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={dataCep.localidade}
               />
-              <br />
               <label htmlFor="estado">Estado</label>
               <input
                 id="estado"
@@ -109,7 +111,6 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={dataCep.uf}
               />
-              <br />
               <label htmlFor="pais">Pais</label>
               <input
                 id="pais"
@@ -120,13 +121,16 @@ const Address = () => {
                 value={props.values.pais}
               />
               <div>
-                <ButtonSecundary type="submit">Procurar pelo CEP</ButtonSecundary>
                 <ButtonSecundary type="submit">Cadastrar Endereço</ButtonSecundary>
               </div>
-            </DivForm>
-          </form>
+            </form>
+            <div>
+              <ButtonSecundary onClick={() => verificaCep(props.values.cep, id)}>Procurar pelo CEP</ButtonSecundary>
+            </div>
+          </DivForm>
         </ContainerForm>
-      )}
+      )
+      }
     </Formik >
   )
 }
