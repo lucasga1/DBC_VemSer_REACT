@@ -8,9 +8,9 @@ function AddressProvider({ children }) {
     const [idParams, setIdParams] = useState();
     console.log(idParams)
 
-    const handleCreateAddress = async () => {
+    const handleCreateAddress = async (values) => {
         try {
-            await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${idParams}`)
+            await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${idParams}`, values)
         } catch (error) {
             console.log(error)
         }
