@@ -10,6 +10,7 @@ import NotFound from "./pages/notFound/NotFound"
 import AuthProvider, { AuthContext } from "./context/AuthContext.js"
 import PeopleProvider from "./context/PeopleContext"
 import Footer from "./components/footer/Footer"
+import AddressProvider from "./context/AddressContext"
 
 function Routers() {
 
@@ -19,24 +20,25 @@ function Routers() {
         <BrowserRouter>
             <AuthProvider>
                 <PeopleProvider>
-                    {!auth ? '' : <Header />}
-                    <Routes>
-                        {!auth ? (
-                            <>
-                                <Route path='/' element={<Login />} style={{backgroundColor: 'gray'}}></Route>
-                                <Route path='/usuarios' element={<Users />}></Route>
-                            </>) : (
-                            <>
-                                <Route path='/endereco' element={<Address />}></Route>
-                                <Route path='/pessoas' element={<PeopleDetails />}></Route>
-                                <Route path='/cadastra-pessoa' element={<PeopleForm />}></Route>
-                                <Route path='/atualiza-pessoa/:id' element={<PeopleForm />}></Route>
-                            </>
-                        )}
+                    <AddressProvider>
+                        {!auth ? '' : <Header />}
+                        <Routes>
+                            {!auth ? (
+                                <>
+                                    <Route path='/' element={<Login />} style={{ backgroundColor: 'gray' }}></Route>
+                                    <Route path='/usuarios' element={<Users />}></Route>
+                                </>) : (
+                                <>
+                                    <Route path='/endereco/:id' element={<Address />}></Route>
+                                    <Route path='/pessoas' element={<PeopleDetails />}></Route>
+                                    <Route path='/cadastra-pessoa' element={<PeopleForm />}></Route>
+                                    <Route path='/atualiza-pessoa/:id' element={<PeopleForm />}></Route>
+                                </>
+                            )}
 
-                        <Route path='*' element={<NotFound />}></Route>
-                    </Routes>
-                    <Footer />
+                            <Route path='*' element={<NotFound />}></Route>
+                        </Routes>
+                    </AddressProvider>
                 </PeopleProvider>
             </AuthProvider>
         </BrowserRouter >

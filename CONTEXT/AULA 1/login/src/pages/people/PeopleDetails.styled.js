@@ -1,29 +1,32 @@
 import styled from "styled-components";
 
 export const BgColor = styled.body`
-  background-color:  #E5E5E5 ;
+  background-color:  #d3d3d3; 
+`;
+
+export const DivAbsolute = styled.div`
+position: absolute;
+max-width: 1040px;
+left: 285px;
+margin: 0 auto;
 `;
 
 export const DivDetail = styled.div`
-position: relative;
-max-width: 1000px;
-margin-left: 280px;
 display: grid;
 `;
 
 export const Pessoas = styled.div`
-background-color: #fff;
 display: grid;
-position: relative;
-max-width: 1000px;
-margin-left: 280px;
+max-width: 1040px;
+background-color: #fff;
 border-radius: 10px;
+margin: 0 auto;
 `;
 
 export const DivButtonRegister = styled.div`
 display: flex;
 justify-content: flex-end;
-margin-right: 30px;
+margin: 0 30px 50px 0;
 `;
 
 export const BarraUsuario = styled.div`
@@ -57,7 +60,7 @@ cursor: pointer;
 export const Descricao = styled.div`
 display: grid;
 padding: 10px 25px;
-grid-template-columns: 2fr 2fr 2fr 2fr 1fr 1fr;
+grid-template-columns: 2.5fr 2.5fr 2fr 2.7fr 2.5fr;
 border:  1px solid #DFE0EB;
 border-top: none;
 font-weight: 700;
@@ -68,15 +71,26 @@ color: #9FA2B4;
 
 export const DivFlex = styled.div`
 display: flex;
+align-items: center;
 `;
 
 
 export const PerfilUsuario = styled.div`
 display: flex;
+align-items: center;
 margin-left: 20px;
 & h1 {
+    padding-right: 20px;
     font-weight: 600;
     font-size: 14px;
+}
+
+& img {
+  margin-left: 10px;
+  width: 60px;
+  padding: 3px;
+  border: 1.5px solid #fff;
+  border-radius: 100%;
 }
 `;
 
@@ -84,6 +98,7 @@ export const ButtonsBarraUsuario = styled.div`
 border-right: 1px solid #bebfc7;
 display: flex;
 align-items: center;
+height: 50px;
 & button {
     background-color: transparent;
     border: none;

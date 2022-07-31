@@ -1,12 +1,12 @@
+import MaskedInput from 'react-text-mask';
+import moment from 'moment';
 import { Formik } from 'formik';
 import { useContext } from 'react';
 import { PeopleContext } from '../../../context/PeopleContext';
-import { ContainerForm } from '../PeopleForm.styled';
 import { maskCpf, maskDate } from '../../../consts';
-import MaskedInput from 'react-text-mask';
-import moment from 'moment';
-
-function FormComponent({ isUpdate, user, id }) {
+import { ContainerForm, DivForm } from '../component/PeopleForm.styled';
+import { ButtonSecundary } from '../../../components/button/ButtonPrimary'
+function FormComponent({ isUpdate, id }) {
     const { handleCreateUser, handleUpdate } = useContext(PeopleContext)
 
     return (
@@ -30,43 +30,54 @@ function FormComponent({ isUpdate, user, id }) {
         >
             {props => (
                 <ContainerForm>
+                    <div>
+                        <h1>{isUpdate ? 'Atualize seus dados' : 'Insira seus dados'}</h1>
+                    </div>
                     <form onSubmit={props.handleSubmit}>
-                        <input
-                            name="nome"
-                            type="text"
-                            placeholder='nome'
-                            value={props.values.nome}
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                        />
-                        <MaskedInput
-                            mask={maskDate}
-                            name="dataNascimento"
-                            type="text"
-                            placeholder='Data de Nascimento'
-                            value={props.values.dataNascimento}
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                        />
-                        <MaskedInput
-                            mask={maskCpf}
-                            name="cpf"
-                            type="text"
-                            placeholder='CPF'
-                            value={props.values.cpf}
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                        />
-                        <input
-                            name="email"
-                            type="email"
-                            placeholder='e-mail'
-                            value={props.values.email}
-                            onChange={props.handleChange}
-                            onBlur={props.handleBlur}
-                        />
-                        {props.errors.name && <div id="feedback">{props.errors.name}</div>}
-                        <button type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</button>
+                        <DivForm>
+                            <label htmlFor='nome'>Nome completo</label>
+                            <input
+                                name="nome"
+                                type="text"
+                                placeholder='Digite seu nome'
+                                value={props.values.nome}
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                            />
+                            <label htmlFor='dataNascimento'>Data de nascimento</label>
+                            <MaskedInput
+                                mask={maskDate}
+                                name="dataNascimento"
+                                type="text"
+                                placeholder='Digite sua data de nascimento'
+                                value={props.values.dataNascimento}
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                            />
+                            <label htmlFor='cpf'>CPF</label>
+                            <MaskedInput
+                                mask={maskCpf}
+                                name="cpf"
+                                type="text"
+                                placeholder='Digite seu CPF'
+                                value={props.values.cpf}
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                            />
+                            <label htmlFor='nome'>E-mail</label>
+                            <input
+                                name="email"
+                                type="email"
+                                placeholder='Digite seu e-mail'
+                                value={props.values.email}
+                                onChange={props.handleChange}
+                                onBlur={props.handleBlur}
+                            />
+                            {props.errors.name && <div id="feedback">{props.errors.name}</div>}
+                            <div>
+                                <ButtonSecundary type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</ButtonSecundary>
+                            </div>
+                        </DivForm>
                     </form>
                 </ContainerForm>
             )}

@@ -3,13 +3,8 @@ import { useContext } from "react";
 import { FaEarlybirds } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
 import { Inputs, Title, Subscribe, Logo, Dashboard, SubscribeDash, Container, Div, BgBody, Link, SpanSignup, SpanForgot, Errors } from "./Users.styled";
-import { ButtonPrimary } from '../../components/button/ButtonPrimary'
-
-import { Button, Modal, Space } from 'antd';
-import React from 'react';
-import * as Yup from "yup"
-
-
+import { ButtonPrimary } from '../../components/button/ButtonPrimary';
+import * as Yup from "yup";
 function Users() {
 
     const { handleSignUp } = useContext(AuthContext);
@@ -18,27 +13,12 @@ function Users() {
         login: Yup.string()
             .min(2, 'Muito curta')
             .max(50, 'Muito longo')
-            .required('Preenchimento Obrigatório'),
+            .required('Required field'),
         senha: Yup.string()
             .min(2, 'Muito curta')
             .max(50, 'Muito longo')
-            .required('Preenchimento Obrigatório')
+            .required('Required field')
     })
-
-    const info = () => {
-        Modal.info({
-          title: 'This is a notification message',
-          content: (
-            <div>
-              <p>some messages...some messages...</p>
-              <p>some messages...some messages...</p>
-            </div>
-          ),
-      
-          onOk() {},
-        });
-      };
-
     return (
         <BgBody>
             <Container>
@@ -75,10 +55,8 @@ function Users() {
                                     <Errors>
                                         {errors.senha && touched.senha ? (<p>{errors.senha}</p>) : null}
                                     </Errors>
-                                </Inputs>
-                               
-                                    <ButtonPrimary type="submit" width="380">Create Account</ButtonPrimary>
-                               
+                                </Inputs>                               
+                                    <ButtonPrimary type="submit" width="380">Create Account</ButtonPrimary>                               
                             </Form>
                         )}
                     </Formik>
@@ -87,6 +65,5 @@ function Users() {
             </Container>
         </BgBody >
     )
-
 }
-export default Users
+export default Users;

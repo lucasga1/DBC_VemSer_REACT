@@ -3,11 +3,12 @@ import styled from "styled-components";
 export const Pessoa = styled.div`
 & div {
 display: grid;
+align-items: center;
 list-style: none;
 font-size: 14px;
 font-weight: 600;
 padding: 25px;
-grid-template-columns: 2fr 2fr 2fr 2fr 1fr 1fr;
+grid-template-columns: 3fr 2fr 2fr 2fr 1fr 1fr 2fr;
 border: 1px solid #DFE0EB;
 border-top: none;
 color: #252733;
@@ -30,6 +31,16 @@ color: #252733;
 
 & button:hover {
     background-color: #4169E1;
+}
+
+& img {
+    width: 38px;
+    padding-right: 10px;
+}
+
+& li {
+    display: flex;
+    align-items: center;
 }
 `;
 

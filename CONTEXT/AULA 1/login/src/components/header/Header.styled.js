@@ -6,7 +6,8 @@ display: flex;
 flex-direction: column;
 background-color: #363740;
 width: 255px;
-height: 100vh;
+height: 450vh;
+
 `;
 
 export const DivLogo = styled.div`

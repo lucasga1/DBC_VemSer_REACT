@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"; 
 
 export const ContainerForm = styled.div`
 position: absolute;
@@ -10,7 +10,6 @@ height: 100%;
 
 & > div {
     text-align: center;
-    margin-top: 20px;
     & h1{
         font-size: 24px;
     }
@@ -21,8 +20,8 @@ export const DivForm = styled.div`
 display: flex;
 flex-direction: column;
 width: 800px;
-margin: 20px auto 20px auto;
-padding: 20px;
+padding: 25px;
+margin: 0 auto;
 border:  2px solid #DFE0EB;
 border-radius: 8px;
 
@@ -53,7 +52,7 @@ border-radius: 8px;
 
 & div {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     margin-top: 10px;
 }
 `;

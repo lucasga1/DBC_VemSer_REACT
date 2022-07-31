@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { apiCep, apiDbc } from '../api';
+import { apiDbc } from '../api';
 
 export const AuthContext = createContext();
 
@@ -7,7 +7,6 @@ function AuthProvider({ children }) {
 
     const [auth, setAuth] = useState(false);
     const [loading, setLoading] = useState(true);
-    const [dataCep, setDataCep] = useState({});
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -42,22 +41,13 @@ function AuthProvider({ children }) {
         try {
             await apiDbc.post('/auth/create', value);
             window.location.href = '/'
-           
+
         } catch (error) {
             console.log(error)
         }
     }
 
-    const verificaCep = async (value) => {
-        try {
-            const { data } = await apiCep.get(`/${value}/json`);
-            setDataCep(data);
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    
-    if(loading){
+    if (loading) {
         return (
             <div>
                 Carregando Pagina - Loading
@@ -68,14 +58,12 @@ function AuthProvider({ children }) {
     return (
         <AuthContext.Provider value={{
             auth,
-            dataCep,
             loading,
             setLoading,
             setAuth,
             handleLogin,
             handleLogout,
-            handleSignUp,
-            verificaCep            
+            handleSignUp,            
         }}>
             {children}
         </AuthContext.Provider>

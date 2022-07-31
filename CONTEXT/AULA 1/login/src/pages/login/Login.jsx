@@ -5,10 +5,8 @@ import { AuthContext } from "../../context/AuthContext";
 import { Inputs, Title, Subscribe, Logo, Dashboard, SubscribeDash, Container, Div, Link, SpanSignup, SpanForgot, Errors, BgBody } from "./Login.styled";
 import { ButtonPrimary } from "../../components/button/ButtonPrimary";
 import * as Yup from 'yup';
-
 function Login() {
     const { handleLogin } = useContext(AuthContext);
-
     const SignupSchema = Yup.object().shape({
         login: Yup.string()
             .min(2, 'Muito curta')
@@ -19,7 +17,6 @@ function Login() {
             .max(50, 'Muito longo')
             .required('Required field')
     })
-
     return (
         <BgBody>
             <Container>
@@ -41,7 +38,6 @@ function Login() {
                         onSubmit={values => {
                             handleLogin(values);
                         }}
-
                     >
                         {({ errors, touched }) => (
                             <Form>
@@ -67,5 +63,4 @@ function Login() {
         </BgBody>
     )
 }
-
 export default Login

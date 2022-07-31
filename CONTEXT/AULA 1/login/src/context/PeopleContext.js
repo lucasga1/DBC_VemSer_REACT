@@ -22,8 +22,7 @@ function PeopleProvider({ children }) {
         setup();
         }, [])
 
-    const getPessoaId = async (id) => {
-        console.log(id)
+    const getPessoaId = async (id) => {        
         try {
             const { data } = await apiDbc.get(`/pessoa/lista-completa?idPessoa=${id}`)
             setUser(data[0])
@@ -48,6 +47,7 @@ function PeopleProvider({ children }) {
     }
 
     const handleDelete = async (id) => {
+        console.log(id)
         try {
             await apiDbc.delete(`/pessoa/${id}`)
             setup()
@@ -59,8 +59,7 @@ function PeopleProvider({ children }) {
     const handleUpdate = async (value, id) => {
         try {
             await apiDbc.put(`/pessoa/${id}`, value)
-            setup()
-            
+            setup()            
             window.location.href = '/pessoas'
         } catch (error) {
             console.log(error)
