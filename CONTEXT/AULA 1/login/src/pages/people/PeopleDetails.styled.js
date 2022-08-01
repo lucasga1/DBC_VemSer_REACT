@@ -6,7 +6,6 @@ export const BgColor = styled.body`
 
 export const DivAbsolute = styled.div`
 position: absolute;
-max-width: 1040px;
 left: 285px;
 margin: 0 auto;
 `;
@@ -17,7 +16,7 @@ display: grid;
 
 export const Pessoas = styled.div`
 display: grid;
-max-width: 1040px;
+max-width: 1070px;
 background-color: #fff;
 border-radius: 10px;
 margin: 0 auto;
