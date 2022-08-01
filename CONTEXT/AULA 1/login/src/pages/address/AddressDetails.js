@@ -1,16 +1,28 @@
-import { useContext } from "react"
-import { AddressContext } from "../../context/AddressContext"
+
+import { apiDbc } from "../../api";
+import { useEffect, useState } from "react";
 import { Div } from "./AddressDetails.styled"
 
 
 function AddressDetails() {
+    const [enderecos, setEnderecos] = useState([])
+    console.log(enderecos)
+    const getEnderecosTotal = async () => {
+        try {
+            const { data } = await apiDbc.get('/endereco/212')
+            setEnderecos(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-    const { enderecoPessoa } = useContext(AddressContext);
-    console.log(enderecoPessoa)
+    useEffect(()=>{
+        getEnderecosTotal()
+    },[])
 
     return (
         <>
-            {enderecoPessoa.map(({ tipo, logradouro, numero, complemento, cep, cidade, estado, pais, idEndereco }) => (
+            {enderecos.map(({ tipo, logradouro, numero, complemento, cep, cidade, estado, pais, idEndereco }) => (
                 <Div key={idEndereco}>
                     <div>
                         <div>

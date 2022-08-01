@@ -1,23 +1,26 @@
 import { apiCep, apiDbc } from "../api";
-import { useState, createContext, useEffect } from 'react';
+import { useState, createContext, useContext } from 'react';
+import { PeopleContext } from "./PeopleContext";
 export const AddressContext = createContext();
 
 function AddressProvider({ children }) {
 
+    const { isUpdate, setIsUpdate } = useContext(PeopleContext)
+
     const [dataCep, setDataCep] = useState({});
-    const [idParams, setIdParams] = useState();
     const [enderecoPessoa, setEnderecoPessoa] = useState([]);
     const [idEndereco, setIdEndereco] = useState();
+    const [idPessoa, setIdPessoa] = useState();
+  
+    const irParaCadastroEndereco = (idPessoa) => {
+        window.location.href = `/endereco/${idPessoa}`
+    }
 
-    const [isUpdate, setIsUpdate] = useState(false);
-    console.log(isUpdate)
-
-
-    const recebeIdAndNavega = (idEndereco, value) => {
-        setIsUpdate(value)
+    const recebeIdAndNavega = (idEndereco, value, idPessoa) => {
+        setIdPessoa(idPessoa)
         setIdEndereco(idEndereco)
+        setIsUpdate(value)
         window.location.href = `/endereco/${idEndereco}`
-
     }
 
     const getAddress = async (idPessoa) => {
@@ -29,29 +32,21 @@ function AddressProvider({ children }) {
         }
     }
 
-    const handleCreateAddress = async (values) => {
+    const handleCreateAddress = async (values, id) => {
         try {
-            await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${idParams}`, values)
+            const { data } = await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${id}`, values)
+            console.log(data)
+            console.log(id)
             window.location.href = `/pessoas`
         } catch (error) {
             console.log(error)
         }
     }
 
-    const handleUpdateAddress = async (value, id) => {
-        try {
-            await apiDbc.put(`/endereco/${id}`, value)
-            window.location.href = '/pessoas'
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
-    const verificaCep = async (value, id) => {
+    const verificaCep = async (value) => {
         try {
             const { data } = await apiCep.get(`/${value}/json`);
             setDataCep(data);
-            setIdParams(id)
         } catch (error) {
             console.log(error)
         }
@@ -63,17 +58,19 @@ function AddressProvider({ children }) {
             enderecoPessoa,
             isUpdate,
             setIsUpdate,
+            idPessoa,
+            setIdPessoa,
             setIdEndereco,
             setDataCep,
             verificaCep,
             handleCreateAddress,
             getAddress,
-            handleUpdateAddress,
-            recebeIdAndNavega
+            recebeIdAndNavega,
+            irParaCadastroEndereco
 
         }} >
             {children}
         </AddressContext.Provider>
-    )
+    )    
 }
 export default AddressProvider

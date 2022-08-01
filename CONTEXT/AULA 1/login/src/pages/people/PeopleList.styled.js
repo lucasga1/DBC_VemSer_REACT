@@ -8,10 +8,14 @@ list-style: none;
 font-size: 14px;
 font-weight: 600;
 padding: 25px;
-grid-template-columns: 240px 100px 110px 220px 90px 90px 140px;
+grid-template-columns: 670px 90px 90px 140px;
 border: 1px solid #DFE0EB;
 border-top: none;
 color: #252733;
+& span {
+    display: grid;
+    grid-template-columns: 210px 100px 110px 1fr;
+}
 }
 
 & div:hover{

@@ -9,7 +9,6 @@ import PeopleForm from "./pages/people/PeopleForm"
 import NotFound from "./pages/notFound/NotFound"
 import AuthProvider, { AuthContext } from "./context/AuthContext.js"
 import PeopleProvider from "./context/PeopleContext"
-import Footer from "./components/footer/Footer"
 import AddressProvider from "./context/AddressContext"
 import AddressDetails from "./pages/address/AddressDetails"
 

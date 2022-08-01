@@ -7,11 +7,11 @@ import { ContainerForm, DivForm } from "./Address.styled";
 
 
 const Address = () => {
-  
-  const { verificaCep, handleCreateAddress, handleUpdateAddress, dataCep, isAddressUpdate } = useContext(AddressContext);
+
+  const { verificaCep, handleCreateAddress, handleUpdateAddress, dataCep, isAddressUpdate, idPessoa } = useContext(AddressContext);
 
   const { id } = useParams()
-  console.log(id)
+  console.log(idPessoa)
 
   if (!dataCep) {
     return
@@ -31,7 +31,7 @@ const Address = () => {
       }}
       onSubmit={(values) => {
         const enviaApi = {
-          idPessoa: parseInt(id),
+          idPessoa: parseInt(idPessoa),
           tipo: values.tipo.toUpperCase(),
           logradouro: dataCep.logradouro,
           numero: parseInt(values.numero),
@@ -41,8 +41,7 @@ const Address = () => {
           estado: dataCep.uf,
           pais: values.pais
         }
-        isAddressUpdate ? handleUpdateAddress(enviaApi, id) : handleCreateAddress(enviaApi);
-        console.log(enviaApi)
+        isAddressUpdate ? handleUpdateAddress(enviaApi, id) : handleCreateAddress(enviaApi, id);
       }}
     >
 
@@ -126,11 +125,11 @@ const Address = () => {
                 value={props.values.pais}
               />
               <div>
-                <ButtonSecundary type="submit">{isAddressUpdate ? 'Atualizar' : 'Cadastrar' }</ButtonSecundary>
+                <ButtonSecundary type="submit">{isAddressUpdate ? 'Atualizar' : 'Cadastrar'}</ButtonSecundary>
               </div>
             </form>
             <div>
-              <ButtonSecundary onClick={() => verificaCep(props.values.cep, id)}>Procurar pelo CEP</ButtonSecundary>
+              <ButtonSecundary onClick={() => verificaCep(props.values.cep)}>Procurar pelo CEP</ButtonSecundary>
             </div>
           </DivForm>
         </ContainerForm>

@@ -6,15 +6,15 @@ import { ButtonSecundary } from '../../../components/button/ButtonPrimary';
 import { AddressContext } from '../../../context/AddressContext';
 import { DivDescricao, Endereco, DivContent } from './ModalAddress.styled'
 
-function ModalAddress({ visible, setVisible, enderecoPessoa }) {
+function ModalAddress({ visible, setVisible, enderecoPessoa, idPessoa }) {
 
     const { recebeIdAndNavega, getAddress } = useContext(AddressContext)
-
+    
 
     const handleDeleteAddress = async (idEndereco) => {
         try {
             await apiDbc.delete(`/endereco/${idEndereco}`)
-            getAddress()
+            getAddress(idPessoa)
 
         } catch (error) {
             console.log(error)
@@ -53,7 +53,7 @@ function ModalAddress({ visible, setVisible, enderecoPessoa }) {
                         <li>{pais}</li>
                     </Endereco>
                     <div>
-                        <ButtonSecundary onClick={() => recebeIdAndNavega(idEndereco, true)}>Atualizar</ButtonSecundary>
+                        <ButtonSecundary onClick={() => recebeIdAndNavega(idEndereco, true, idPessoa)}>Atualizar</ButtonSecundary>
                         <ButtonSecundary onClick={() => handleDeleteAddress(idEndereco)}>Excluir</ButtonSecundary>
                     </div>
                 </DivContent>
