@@ -46,8 +46,7 @@ function PeopleProvider({ children }) {
         window.location.href = '/cadastra-pessoa'
     }
 
-    const handleDelete = async (id) => {
-        console.log(id)
+    const handleDelete = async (id) => {       
         try {
             await apiDbc.delete(`/pessoa/${id}`)
             setup()

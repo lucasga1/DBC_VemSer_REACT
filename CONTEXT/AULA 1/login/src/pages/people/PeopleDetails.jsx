@@ -47,7 +47,7 @@ function PeopleDetails() {
                     </Descricao>
                     <PeopleList />
                     <DivButtonRegister>
-                        <ButtonSecundary onClick={mudaPagina}>Register new person</ButtonSecundary>
+                        <ButtonSecundary onClick={mudaPagina} style={{cursor: 'pointer'}}>Register new person</ButtonSecundary>
                     </DivButtonRegister>
                 </Pessoas>
             </DivAbsolute>

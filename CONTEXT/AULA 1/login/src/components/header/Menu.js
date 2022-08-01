@@ -10,9 +10,7 @@ function Menu() {
     <MenuDiv>
       <nav>
         <ul >
-          <Item value='Pessoas' url='/pessoas' />
-          <Item value='Cadastro Pessoas' url='/cadastra-pessoa' />
-          <Item value='Endereço' url='/endereco' />
+          <Item value='Pessoas' url='/pessoas' />          
         </ul>
       </nav>
       {auth && <button width="380" onClick={handleLogout} >Sair</button>}

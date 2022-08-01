@@ -5,13 +5,18 @@ import { ButtonSecundary } from "../../components/button/ButtonPrimary";
 import { AddressContext } from "../../context/AddressContext";
 import { ContainerForm, DivForm } from "./Address.styled";
 
-const Address = () => {
 
-  const { verificaCep, handleCreateAddress, dataCep } = useContext(AddressContext);
+const Address = () => {
+  
+  const { verificaCep, handleCreateAddress, handleUpdateAddress, dataCep, isAddressUpdate } = useContext(AddressContext);
+
   const { id } = useParams()
+  console.log(id)
+
   if (!dataCep) {
     return
   }
+
   return (
     <Formik
       initialValues={{
@@ -36,8 +41,8 @@ const Address = () => {
           estado: dataCep.uf,
           pais: values.pais
         }
+        isAddressUpdate ? handleUpdateAddress(enviaApi, id) : handleCreateAddress(enviaApi);
         console.log(enviaApi)
-        handleCreateAddress(enviaApi)
       }}
     >
 
@@ -48,14 +53,14 @@ const Address = () => {
           </div>
           <DivForm>
             <form onSubmit={props.handleSubmit}>
-              <label htmlFor="tipo">Tipo</label>
+              <label htmlFor="cep">CEP</label>
               <input
-                id="tipo"
-                name="tipo"
+                id="cep"
+                name="cep"
                 type="text"
-                placeholder="Tipo"
+                placeholder="CEP"
                 onChange={props.handleChange}
-                value={props.values.tipo}
+                value={props.values.cep}
               />
               <label htmlFor="logradouro">Logradouro</label>
               <input
@@ -65,33 +70,6 @@ const Address = () => {
                 placeholder="Logradouro"
                 onChange={props.handleChange}
                 value={dataCep.logradouro}
-              />
-              <label htmlFor="numero">Número</label>
-              <input
-                id="numero"
-                name="numero"
-                type="text"
-                placeholder="Número"
-                onChange={props.handleChange}
-                value={props.values.numero}
-              />
-              <label htmlFor="complemento">Complemento</label>
-              <input
-                id="complemento"
-                name="complemento"
-                type="text"
-                placeholder="Complemento"
-                onChange={props.handleChange}
-                value={props.values.complemento}
-              />
-              <label htmlFor="cep">CEP</label>
-              <input
-                id="cep"
-                name="cep"
-                type="text"
-                placeholder="CEP"
-                onChange={props.handleChange}
-                value={props.values.cep}
               />
               <label htmlFor="cidade">Cidade</label>
               <input
@@ -111,6 +89,33 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={dataCep.uf}
               />
+              <label htmlFor="tipo">Tipo</label>
+              <input
+                id="tipo"
+                name="tipo"
+                type="text"
+                placeholder="Tipo"
+                onChange={props.handleChange}
+                value={props.values.tipo}
+              />
+              <label htmlFor="complemento">Complemento</label>
+              <input
+                id="complemento"
+                name="complemento"
+                type="text"
+                placeholder="Complemento"
+                onChange={props.handleChange}
+                value={props.values.complemento}
+              />
+              <label htmlFor="numero">Número</label>
+              <input
+                id="numero"
+                name="numero"
+                type="text"
+                placeholder="Número"
+                onChange={props.handleChange}
+                value={props.values.numero}
+              />
               <label htmlFor="pais">Pais</label>
               <input
                 id="pais"
@@ -121,7 +126,7 @@ const Address = () => {
                 value={props.values.pais}
               />
               <div>
-                <ButtonSecundary type="submit">Cadastrar Endereço</ButtonSecundary>
+                <ButtonSecundary type="submit">{isAddressUpdate ? 'Atualizar' : 'Cadastrar' }</ButtonSecundary>
               </div>
             </form>
             <div>

@@ -8,7 +8,7 @@ list-style: none;
 font-size: 14px;
 font-weight: 600;
 padding: 25px;
-grid-template-columns: 3fr 2fr 2fr 2fr 1fr 1fr 2fr;
+grid-template-columns: 250px 110px 120px 250px 100px 100px 140px;
 border: 1px solid #DFE0EB;
 border-top: none;
 color: #252733;
@@ -44,3 +44,7 @@ color: #252733;
 }
 `;
 
+export const Div = styled.div`
+position: absolute;
+left: 285px;
+`

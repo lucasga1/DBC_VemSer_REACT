@@ -26,5 +26,5 @@ export const ButtonSecundary = styled.button(() => ({
     fontFamily: 'Mulish',
     fontSize: 14,
     fontWeight: 600,
-    marginTop: 15,
+    marginTop: 15,    
 }));

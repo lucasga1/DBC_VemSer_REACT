@@ -53,5 +53,4 @@ width: 800px;
     outline: none;
     background-color: #E5E5E5;
 }
-
 `;

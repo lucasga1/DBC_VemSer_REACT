@@ -6,6 +6,7 @@ import { PeopleContext } from '../../../context/PeopleContext';
 import { maskCpf, maskDate } from '../../../consts';
 import { ContainerForm, DivForm } from '../component/PeopleForm.styled';
 import { ButtonSecundary } from '../../../components/button/ButtonPrimary'
+
 function FormComponent({ isUpdate, id }) {
     const { handleCreateUser, handleUpdate } = useContext(PeopleContext)
 
@@ -75,7 +76,7 @@ function FormComponent({ isUpdate, id }) {
                             />
                             {props.errors.name && <div id="feedback">{props.errors.name}</div>}
                             <div>
-                                <ButtonSecundary type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</ButtonSecundary>
+                                <ButtonSecundary style={{cursor: 'pointer'}} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</ButtonSecundary>
                             </div>
                         </DivForm>
                     </form>

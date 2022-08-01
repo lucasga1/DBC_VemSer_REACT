@@ -60,7 +60,7 @@ cursor: pointer;
 export const Descricao = styled.div`
 display: grid;
 padding: 10px 25px;
-grid-template-columns: 2.5fr 2.5fr 2fr 2.7fr 2.5fr;
+grid-template-columns: 250px 110px 120px 250px 100px;
 border:  1px solid #DFE0EB;
 border-top: none;
 font-weight: 700;
@@ -99,9 +99,10 @@ border-right: 1px solid #bebfc7;
 display: flex;
 align-items: center;
 height: 50px;
+
 & button {
     background-color: transparent;
     border: none;
-    margin: 0 10px;
+    margin: 0 20px;
 }
 `;
