@@ -1,26 +1,22 @@
 import { apiCep, apiDbc } from "../api";
-import { useState, createContext, useContext } from 'react';
-import { PeopleContext } from "./PeopleContext";
+import { useState, createContext, useContext, useEffect } from 'react';
 export const AddressContext = createContext();
 
 function AddressProvider({ children }) {
 
-    const { isUpdate, setIsUpdate } = useContext(PeopleContext)
-
-    const [dataCep, setDataCep] = useState({});
     const [enderecoPessoa, setEnderecoPessoa] = useState([]);
+    const [dataCep, setDataCep] = useState({});
     const [idEndereco, setIdEndereco] = useState();
     const [idPessoa, setIdPessoa] = useState();
-  
-    const irParaCadastroEndereco = (idPessoa) => {
-        window.location.href = `/endereco/${idPessoa}`
-    }
+    const [isAddressUpdate, setIsAddressUpdate] = useState(false);
 
-    const recebeIdAndNavega = (idEndereco, value, idPessoa) => {
-        setIdPessoa(idPessoa)
-        setIdEndereco(idEndereco)
-        setIsUpdate(value)
-        window.location.href = `/endereco/${idEndereco}`
+    console.log(idPessoa)
+    console.log(idEndereco)
+    console.log(isAddressUpdate)
+
+    const irParaCadastroEndereco = (idPessoa) => {
+        /* setIsAddressUpdate(false) */
+        window.location.href = `/endereco/${idPessoa}`
     }
 
     const getAddress = async (idPessoa) => {
@@ -43,6 +39,21 @@ function AddressProvider({ children }) {
         }
     }
 
+    const handleDeleteAddress = async (idEndereco) => {
+        try {
+            await apiDbc.delete(`/endereco/${idEndereco}`)
+            getAddress(idPessoa)
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const mudarParaCadastroAtualizar = (idEndereco) => {
+        setIsAddressUpdate(true)
+        window.location.href = `/endereco/${idEndereco}`        
+    }
+
     const verificaCep = async (value) => {
         try {
             const { data } = await apiCep.get(`/${value}/json`);
@@ -56,21 +67,21 @@ function AddressProvider({ children }) {
         <AddressContext.Provider value={{
             dataCep,
             enderecoPessoa,
-            isUpdate,
-            setIsUpdate,
+            mudarParaCadastroAtualizar,
+            verificaCep,
+            handleCreateAddress,
+
             idPessoa,
             setIdPessoa,
             setIdEndereco,
             setDataCep,
-            verificaCep,
-            handleCreateAddress,
             getAddress,
-            recebeIdAndNavega,
-            irParaCadastroEndereco
-
+            isAddressUpdate,            
+            irParaCadastroEndereco,
+            handleDeleteAddress
         }} >
             {children}
         </AddressContext.Provider>
-    )    
+    )
 }
 export default AddressProvider

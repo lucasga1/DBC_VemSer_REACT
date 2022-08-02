@@ -4,8 +4,8 @@ import { PeopleContext } from '../../context/PeopleContext';
 import { Pessoas, BgColor, Descricao, DivDetail, BarraUsuario, DivFlex, DivAbsolute, AllTickets, PerfilUsuario, ButtonsBarraUsuario, DivButtonRegister } from './PeopleDetails.styled';
 import { ButtonSecundary } from "../../components/button/ButtonPrimary";
 import { FaSistrix, FaBell, FaEllipsisV, FaLongArrowAltUp, FaFilter } from "react-icons/fa";
-import Img from 'react-image'
 import fotoPerfil from '../../imagens/fotoPerfil.png'
+import { useEffect } from "react";
 
 function PeopleDetails() {
 
@@ -32,7 +32,7 @@ function PeopleDetails() {
                 </DivDetail >
                 <Pessoas>
                     <AllTickets>
-                        <h3>All tickets</h3>
+                        <h3>Usuários</h3>
                         <div>
                             <button><FaLongArrowAltUp style={{ fontSize: '14px', color: '#C5C7CD' }} /><FaEllipsisV style={{ fontSize: '14px', color: '#C5C7CD' }} />Sort</button>
                             <button><FaFilter style={{ fontSize: '14px', color: '#C5C7CD', padding: '0 5px' }} />Filter</button>
@@ -47,7 +47,7 @@ function PeopleDetails() {
                     </Descricao>
                     <PeopleList />
                     <DivButtonRegister>
-                        <ButtonSecundary onClick={mudaPagina} style={{cursor: 'pointer'}}>Register new person</ButtonSecundary>
+                        <ButtonSecundary onClick={mudaPagina} style={{cursor: 'pointer'}}>Registrar novo usuário</ButtonSecundary>
                     </DivButtonRegister>
                 </Pessoas>
             </DivAbsolute>

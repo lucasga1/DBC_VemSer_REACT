@@ -1,17 +1,14 @@
 import styled from "styled-components";
 
 export const ContainerForm = styled.div`
-position: absolute;
-left: 285px;
 display: grid;
 align-items: center;
-width: 81.5%;
-height: 100%;
 
 & > div {
     text-align: center;
     & h1{
         font-size: 24px;
+        margin-top: 30px;
     }
 }
 `;

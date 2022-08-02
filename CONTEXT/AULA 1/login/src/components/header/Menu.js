@@ -10,10 +10,10 @@ function Menu() {
     <MenuDiv>
       <nav>
         <ul >
-          <Item value='Pessoas' url='/pessoas' />          
+          <Item value='Pessoas' url='/pessoas' />
         </ul>
-      </nav>
       {auth && <button width="380" onClick={handleLogout} >Sair</button>}
+      </nav>
     </MenuDiv>
   )
 }

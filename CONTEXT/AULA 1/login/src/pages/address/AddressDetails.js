@@ -6,7 +6,7 @@ import { Div } from "./AddressDetails.styled"
 
 function AddressDetails() {
     const [enderecos, setEnderecos] = useState([])
-    console.log(enderecos)
+  
     const getEnderecosTotal = async () => {
         try {
             const { data } = await apiDbc.get('/endereco/212')

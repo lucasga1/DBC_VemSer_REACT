@@ -1,25 +1,25 @@
 import { Modal } from 'antd';
 import 'antd/dist/antd.css';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { apiDbc } from '../../../api';
 import { ButtonSecundary } from '../../../components/button/ButtonPrimary';
 import { AddressContext } from '../../../context/AddressContext';
 import { DivDescricao, Endereco, DivContent } from './ModalAddress.styled'
+import { message, Popconfirm } from 'antd';
 
 function ModalAddress({ visible, setVisible, enderecoPessoa, idPessoa }) {
 
-    const { recebeIdAndNavega, getAddress } = useContext(AddressContext)
-    
+    const { handleDeleteAddress, mudarParaCadastroAtualizar } = useContext(AddressContext)
 
-    const handleDeleteAddress = async (idEndereco) => {
-        try {
-            await apiDbc.delete(`/endereco/${idEndereco}`)
-            getAddress(idPessoa)
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
+// toastr ////////////////////////////////////////////
+    const confirm = (idEndereco, value) => {
+        message.success(value);
+        handleDeleteAddress(idEndereco)
+    };
+    const cancel = (value) => {
+        message.error(value);
+    };
+/////////////////////////////////////////////////////
 
     return (
         <Modal
@@ -47,14 +47,22 @@ function ModalAddress({ visible, setVisible, enderecoPessoa, idPessoa }) {
                         <li>{logradouro}</li>
                         <li>{numero}</li>
                         <li>{complemento}</li>
-                        <li>{cep}</li>
+                        <li>{cep.replace(/\D/g, '')
+                            .replace(/(\d{5})(\d)/, '$1-$2')
+                            .replace(/(-\d{3})\d+?$/, '$1')}</li>
                         <li>{cidade}</li>
                         <li>{estado}</li>
                         <li>{pais}</li>
                     </Endereco>
                     <div>
-                        <ButtonSecundary onClick={() => recebeIdAndNavega(idEndereco, true, idPessoa)}>Atualizar</ButtonSecundary>
-                        <ButtonSecundary onClick={() => handleDeleteAddress(idEndereco)}>Excluir</ButtonSecundary>
+                        <ButtonSecundary onClick={() => mudarParaCadastroAtualizar(idEndereco, idPessoa)}>Atualizar</ButtonSecundary>
+                        <Popconfirm
+                            title="Tem certeza que deseja excluir?"
+                            onConfirm={() => confirm(idEndereco, 'Endereço excluído com sucesso!')}
+                            onCancel={() => cancel('Endereço não excluído.')}
+                            okText="Sim" cancelText="Não">
+                            <ButtonSecundary>Excluir</ButtonSecundary>
+                        </Popconfirm>
                     </div>
                 </DivContent>
             ))

@@ -46,9 +46,9 @@ font-size: 52px;
 `;
 
 export const Title = styled.h1`
-margin-top: 32px;
+margin-top: 18px;
 color: #000;
-font-size: 24px;
+font-size: 20px;
 font-weight: 700;
 `;
 
@@ -87,6 +87,7 @@ display: grid;
 
 & input:focus {
     outline: none;
+    background-color: #DFE0EB;
 }
 
 & input::placeholder {
@@ -106,7 +107,7 @@ color: #9FA2B4;
 
 & p {
     color: #FF4500;
-    font-size: 12px;
+    font-size: 12px; 
 }
 `;
 
@@ -128,6 +129,6 @@ export const SpanForgot = styled.span`
 font-size: 10px;
 font-weight: 400;
 color: #9FA2B4;
-padding-left: 138px;
+padding-left: 158px;
 `;
 

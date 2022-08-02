@@ -1,24 +1,30 @@
 import MaskedInput from 'react-text-mask';
 import moment from 'moment';
 import { Formik } from 'formik';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { PeopleContext } from '../../../context/PeopleContext';
 import { maskCpf, maskDate } from '../../../consts';
 import { ContainerForm, DivForm } from '../component/PeopleForm.styled';
 import { ButtonSecundary } from '../../../components/button/ButtonPrimary'
+import { Toaster } from 'react-hot-toast';
 
 function FormComponent({ isUpdate, id }) {
-    const { handleCreateUser, handleUpdate } = useContext(PeopleContext)
-
+    const { handleCreateUser, handleUpdate, user } = useContext(PeopleContext)
+    console.log(user)
+    
+    if(!user && isUpdate){
+        return
+    }
     return (
 
         <Formik
             initialValues={{
-                nome: '',
-                dataNascimento: '',
-                cpf: '',
-                email: ''
+                nome: user.nome ? user.nome : '',
+                dataNascimento: user.dataNascimento ? user.dataNascimento : '',
+                cpf: user.cpf ? user.cpf : '',
+                email: user.email ? user.email : ''
             }}
+
             onSubmit={(values) => {
                 const newValor = {
                     nome: values.nome,
@@ -77,6 +83,7 @@ function FormComponent({ isUpdate, id }) {
                             {props.errors.name && <div id="feedback">{props.errors.name}</div>}
                             <div>
                                 <ButtonSecundary style={{cursor: 'pointer'}} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</ButtonSecundary>
+                                <Toaster />
                             </div>
                         </DivForm>
                     </form>

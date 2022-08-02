@@ -2,8 +2,9 @@ import { Form, Field, Formik } from "formik";
 import { useContext } from "react";
 import { FaEarlybirds } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
-import { Inputs, Title, Subscribe, Logo, Dashboard, SubscribeDash, Container, Div, BgBody, Link, SpanSignup, SpanForgot, Errors } from "./Users.styled";
+import { Inputs, Title, Subscribe, Logo, Dashboard, SubscribeDash, Container, Div, BgBody, SpanForgot, Errors } from "./Users.styled";
 import { ButtonPrimary } from '../../components/button/ButtonPrimary';
+import { Toaster } from 'react-hot-toast';
 import * as Yup from "yup";
 function Users() {
 
@@ -24,11 +25,11 @@ function Users() {
             <Container>
                 <Dashboard>
                     <Logo><a href='/'><FaEarlybirds style={{ fontSize: '40px', color: '#3751FF' }} /></a></Logo>
-                    <SubscribeDash>Dashboard Kit</SubscribeDash>
+                    <SubscribeDash>Seja bem vindo!</SubscribeDash>
                 </Dashboard>
                 <Div>
-                    <Title>Log In to Dashboard Kit</Title>
-                    <Subscribe>Enter your email and password bellow</Subscribe>
+                    <Title>A VISÃO DO FUTURO - ENTERPRISE</Title>
+                    <Subscribe>Acesse com seu usuário e senha</Subscribe>
                 </Div>
                 <Div>
                     <Formik
@@ -45,22 +46,22 @@ function Users() {
                         {({ errors, touched }) => (
                             <Form>
                                 <Inputs>
-                                    <label htmlFor="login">EMAIL</label>
+                                    <label htmlFor="login">USUÁRIO*</label>
                                     <Field name="login" placeholder="Email address" />
                                     <Errors>
                                         {errors.login && touched.login ? (<p>{errors.login}</p>) : null}
                                     </Errors>
-                                    <label htmlFor="password">PASSWORD<SpanForgot>Forgot password?</SpanForgot></label>
+                                    <label htmlFor="password">SENHA*<SpanForgot>Esqueceu sua senha?</SpanForgot></label>
                                     <Field name="senha" type="password" placeholder="Password" />
                                     <Errors>
                                         {errors.senha && touched.senha ? (<p>{errors.senha}</p>) : null}
                                     </Errors>
                                 </Inputs>                               
-                                    <ButtonPrimary type="submit" width="380">Create Account</ButtonPrimary>                               
+                                    <ButtonPrimary type="submit" width="380" style={{marginBottom: '60px', cursor: 'pointer'}}>Criar conta</ButtonPrimary>
+                                    <Toaster />                               
                             </Form>
                         )}
-                    </Formik>
-                    <SpanSignup>Don,t have an acount?<Link href='/usuarios'>Sign up</Link></SpanSignup>
+                    </Formik>                    
                 </Div>
             </Container>
         </BgBody >

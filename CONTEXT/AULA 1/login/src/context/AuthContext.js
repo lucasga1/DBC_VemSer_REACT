@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react';
 import { apiDbc } from '../api';
+import toast from 'react-hot-toast';
 
 export const AuthContext = createContext();
 
@@ -7,6 +8,20 @@ function AuthProvider({ children }) {
 
     const [auth, setAuth] = useState(false);
     const [loading, setLoading] = useState(true);
+    const notifyPositive = (value) => toast(value, {
+        position: 'top-right',
+        style: {
+            backgroundColor: '	#7CFC00',
+            color: '#000'
+        },
+    });
+    const notifyError = (value) => toast(value, {
+        position: 'top-right',
+        style: {
+            backgroundColor: '#FF0000',
+            color: '#fff'
+        },
+    });
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -20,13 +35,17 @@ function AuthProvider({ children }) {
     const handleLogin = async (value) => {
         try {
             const { data } = await apiDbc.post('/auth', value);
-            localStorage.setItem('token', data);
-            apiDbc.defaults.headers.common['Authorization'] = data;
-            setAuth(true);
-            window.location.href = '/pessoas'
+            notifyPositive('Login efetuado com sucesso!')
+            setTimeout(() => {
+                localStorage.setItem('token', data);
+                apiDbc.defaults.headers.common['Authorization'] = data;
+                setAuth(true);
+                window.location.href = '/pessoas'
+            }, 1500
+            )
         } catch (error) {
             console.log(error)
-            alert('Usuário ou senha inválidos');
+            notifyError('Usuário ou senha inválido.')
         }
     }
 
@@ -40,9 +59,12 @@ function AuthProvider({ children }) {
     const handleSignUp = async (value) => {
         try {
             await apiDbc.post('/auth/create', value);
-            window.location.href = '/'
-
+            notifyPositive('Cadastro efetuado com sucesso!')
+            setTimeout(() => {
+                window.location.href = '/'
+            }, 1500)
         } catch (error) {
+            notifyError('Usuário já cadastrado, tente novamente.')
             console.log(error)
         }
     }
@@ -63,7 +85,7 @@ function AuthProvider({ children }) {
             setAuth,
             handleLogin,
             handleLogout,
-            handleSignUp,            
+            handleSignUp,
         }}>
             {children}
         </AuthContext.Provider>

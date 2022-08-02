@@ -47,10 +47,11 @@ font-size: 60px;
 `;
 
 export const Title = styled.h1`
-margin-top: 32px;
+margin-top: 18px;
 color: #000;
-font-size: 24px;
+font-size: 20px;
 font-weight: 700;
+text-align: center;
 `;
 
 export const SubscribeDash = styled.h2`
@@ -88,6 +89,7 @@ display: grid;
 
 & input:focus {
     outline: none;
+    background-color: #DFE0EB;
 }
 
 & input::placeholder {
@@ -121,14 +123,14 @@ export const SpanSignup = styled.span`
 font-size: 14px;
 color: #9FA2B4;
 text-align: center;
-margin-top: 32px;
-margin-bottom: 30px;
+margin-top: 20px;
+padding-bottom: 30px;
 `;
 
 export const SpanForgot = styled.span`
 font-size: 10px;
 font-weight: 400;
 color: #9FA2B4;
-padding-left: 138px;
+padding-left: 158px;
 `;
 

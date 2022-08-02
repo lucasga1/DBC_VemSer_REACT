@@ -10,7 +10,6 @@ import NotFound from "./pages/notFound/NotFound"
 import AuthProvider, { AuthContext } from "./context/AuthContext.js"
 import PeopleProvider from "./context/PeopleContext"
 import AddressProvider from "./context/AddressContext"
-import AddressDetails from "./pages/address/AddressDetails"
 
 function Routers() {
 
@@ -33,7 +32,6 @@ function Routers() {
                                     <Route path='/pessoas' element={<PeopleDetails />}></Route>
                                     <Route path='/cadastra-pessoa' element={<PeopleForm />}></Route>
                                     <Route path='/atualiza-pessoa/:id' element={<PeopleForm />}></Route>
-                                    <Route path='/enderecos' element={<AddressDetails />}></Route>
 
                                 </>
                             )}

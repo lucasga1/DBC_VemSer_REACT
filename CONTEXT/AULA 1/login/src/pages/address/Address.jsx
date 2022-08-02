@@ -1,7 +1,9 @@
 import { Formik } from "formik";
 import { useContext, } from "react";
 import { useParams } from "react-router-dom";
+import MaskedInput from "react-text-mask";
 import { ButtonSecundary } from "../../components/button/ButtonPrimary";
+import { maskCep } from "../../consts";
 import { AddressContext } from "../../context/AddressContext";
 import { ContainerForm, DivForm } from "./Address.styled";
 
@@ -9,14 +11,11 @@ import { ContainerForm, DivForm } from "./Address.styled";
 const Address = () => {
 
   const { verificaCep, handleCreateAddress, handleUpdateAddress, dataCep, isAddressUpdate, idPessoa } = useContext(AddressContext);
-
   const { id } = useParams()
+
   console.log(idPessoa)
-
-  if (!dataCep) {
-    return
-  }
-
+  console.log(isAddressUpdate)
+  
   return (
     <Formik
       initialValues={{
@@ -34,13 +33,14 @@ const Address = () => {
           idPessoa: parseInt(idPessoa),
           tipo: values.tipo.toUpperCase(),
           logradouro: dataCep.logradouro,
-          numero: parseInt(values.numero),
+          numero: values.numero,
           complemento: values.complemento,
-          cep: values.cep,
+          cep: values.cep.replace(/[^0-9]/gi, ''),
           cidade: dataCep.localidade,
           estado: dataCep.uf,
           pais: values.pais
         }
+        console.log(enviaApi)
         isAddressUpdate ? handleUpdateAddress(enviaApi, id) : handleCreateAddress(enviaApi, id);
       }}
     >
@@ -52,16 +52,18 @@ const Address = () => {
           </div>
           <DivForm>
             <form onSubmit={props.handleSubmit}>
-              <label htmlFor="cep">CEP</label>
-              <input
+              <label htmlFor="cep">CEP*</label>
+              <MaskedInput
+                mask={maskCep}
                 id="cep"
                 name="cep"
                 type="text"
                 placeholder="CEP"
+                onBlur={() => verificaCep(props.values.cep)}
                 onChange={props.handleChange}
                 value={props.values.cep}
               />
-              <label htmlFor="logradouro">Logradouro</label>
+              <label htmlFor="logradouro">Logradouro*</label>
               <input
                 id="logradouro"
                 name="logradouro"
@@ -70,7 +72,7 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={dataCep.logradouro}
               />
-              <label htmlFor="cidade">Cidade</label>
+              <label htmlFor="cidade">Cidade*</label>
               <input
                 id="cidade"
                 name="cidade"
@@ -79,7 +81,7 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={dataCep.localidade}
               />
-              <label htmlFor="estado">Estado</label>
+              <label htmlFor="estado">Estado*</label>
               <input
                 id="estado"
                 name="estado"
@@ -88,11 +90,11 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={dataCep.uf}
               />
-              <label htmlFor="tipo">Tipo</label>
+              <label htmlFor="tipo">Tipo*</label>
               <input
                 id="tipo"
                 name="tipo"
-                type="text"
+                type="select"
                 placeholder="Tipo"
                 onChange={props.handleChange}
                 value={props.values.tipo}
@@ -106,7 +108,7 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={props.values.complemento}
               />
-              <label htmlFor="numero">Número</label>
+              <label htmlFor="numero">Número*</label>
               <input
                 id="numero"
                 name="numero"
@@ -115,7 +117,7 @@ const Address = () => {
                 onChange={props.handleChange}
                 value={props.values.numero}
               />
-              <label htmlFor="pais">Pais</label>
+              <label htmlFor="pais">Pais*</label>
               <input
                 id="pais"
                 name="pais"
@@ -128,9 +130,6 @@ const Address = () => {
                 <ButtonSecundary type="submit">{isAddressUpdate ? 'Atualizar' : 'Cadastrar'}</ButtonSecundary>
               </div>
             </form>
-            <div>
-              <ButtonSecundary onClick={() => verificaCep(props.values.cep)}>Procurar pelo CEP</ButtonSecundary>
-            </div>
           </DivForm>
         </ContainerForm>
       )

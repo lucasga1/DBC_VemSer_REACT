@@ -1,13 +1,12 @@
 import styled from "styled-components";
 
 export const HeaderDiv = styled.div`
-position: absolute;
 display: flex;
-flex-direction: column;
+align-items: center;
+justify-content: space-around;
+flex-direction: row;
 background-color: #363740;
-width: 255px;
-height: 450vh;
-
+height: 70px;
 `;
 
 export const DivLogo = styled.div`

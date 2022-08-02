@@ -10,7 +10,9 @@ function Header() {
         <Logo><Link to='/'><FaEarlybirds style={{ fontSize: '35', color: '#3751FF' }} /></Link></Logo>
         <h1>Dashboard Kit</h1>
       </DivLogo>
-      <Menu />
+      <div>
+        <Menu />
+      </div>
     </HeaderDiv>
   )
 }

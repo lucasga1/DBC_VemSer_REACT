@@ -1,36 +1,50 @@
 import styled from "styled-components";
 
 export const Pessoa = styled.div`
+
 & div {
 display: grid;
-align-items: center;
+grid-template-columns: 3fr 1fr;
+justify-content: space-between;
 list-style: none;
 font-size: 14px;
 font-weight: 600;
-padding: 25px;
-grid-template-columns: 670px 90px 90px 140px;
-border: 1px solid #DFE0EB;
+padding: 15px;
+border: 1px solid #E5E5E5;
 border-top: none;
-color: #252733;
+
+& div:last-child{
+    display: flex;
+    justify-content: space-between;
+    border: none;
+}
 & span {
-    display: grid;
-    grid-template-columns: 210px 100px 110px 1fr;
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;    
 }
 }
 
 & div:hover{
     background-color: #E5E5E5;
-    padding: 25px;
+    padding: 15px;
     cursor: pointer;
 }
 
 & button {
+    display: flex;
+    justify-content: center;
+    flex-flow: row nowrap;
+    font-family: 'Mulish';
     margin: 0 5px;
-    padding: 5px 0;
+    padding: 5px 10px;
     background-color: #3751FF;
     border: none;
     border-radius: 8px;
     color: #fff;
+}
+& button:last-child {
+    width: 160px;
 }
 
 & button:hover {
@@ -43,12 +57,8 @@ color: #252733;
 }
 
 & li {
+    width: 200px;
     display: flex;
     align-items: center;
 }
 `;
-
-export const Div = styled.div`
-position: absolute;
-left: 285px;
-`

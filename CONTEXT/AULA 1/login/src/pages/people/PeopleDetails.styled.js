@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const BgColor = styled.body`
   background-color:  #d3d3d3; 
+  height: 100%;
 `;
 
 export const DivAbsolute = styled.div`
-position: absolute;
-left: 285px;
+width: 1200px;
 margin: 0 auto;
 `;
 
@@ -16,7 +16,7 @@ display: grid;
 
 export const Pessoas = styled.div`
 display: grid;
-max-width: 1070px;
+max-width: 1200px;
 background-color: #fff;
 border-radius: 10px;
 margin: 0 auto;
@@ -39,7 +39,8 @@ color:#252733;
 export const AllTickets = styled.div`
 display: flex;
 justify-content: space-between;
-padding: 20px 25px;
+padding: 20px 15px;
+font-size: 16px;
 border:  1px solid #DFE0EB;
 border-bottom: none;
 color:#252733;
@@ -57,16 +58,26 @@ cursor: pointer;
 `;
 
 export const Descricao = styled.div`
-display: grid;
-padding: 10px 25px;
-grid-template-columns: 250px 110px 120px 250px 100px;
+display: flex;
+padding: 10px 15px;
 border:  1px solid #DFE0EB;
 border-top: none;
 font-weight: 700;
-font-size: 14px;
+font-size: 16px;
+font-family: 'Mulish';
 color: #9FA2B4;
-`;
+& p {
+  width: 200px;
+}
 
+& p:nth-child(4) {
+  width: 225px;
+}
+
+& p:last-child{
+  width: 325px;
+}
+`;
 
 export const DivFlex = styled.div`
 display: flex;
@@ -78,6 +89,7 @@ export const PerfilUsuario = styled.div`
 display: flex;
 align-items: center;
 margin-left: 20px;
+
 & h1 {
     padding-right: 20px;
     font-weight: 600;
