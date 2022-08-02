@@ -10,6 +10,7 @@ import NotFound from "./pages/notFound/NotFound"
 import AuthProvider, { AuthContext } from "./context/AuthContext.js"
 import PeopleProvider from "./context/PeopleContext"
 import AddressProvider from "./context/AddressContext"
+import FormContatos from "./pages/contatos/FormContatos"
 
 function Routers() {
 
@@ -28,7 +29,9 @@ function Routers() {
                                     <Route path='/usuarios' element={<Users />}></Route>
                                 </>) : (
                                 <>
-                                    <Route path='/endereco/:id' element={<Address />}></Route>
+                                    <Route path='/cadastra-endereco/:idPessoa' element={<Address />}></Route>
+                                    <Route path='/atualiza-endereco/:idPessoa/:idEndereco' element={<Address />}></Route>
+                                    <Route path='/contatos/:id' element={<FormContatos />}></Route>
                                     <Route path='/pessoas' element={<PeopleDetails />}></Route>
                                     <Route path='/cadastra-pessoa' element={<PeopleForm />}></Route>
                                     <Route path='/atualiza-pessoa/:id' element={<PeopleForm />}></Route>
@@ -45,3 +48,4 @@ function Routers() {
     )
 }
 export default Routers
+

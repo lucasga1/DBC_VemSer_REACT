@@ -1,10 +1,9 @@
 import styled from "styled-components";
 
 export const MenuDiv = styled.div`
-    
-    & nav {
-     display: flex;
-}
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ 
     & button {
     width: 100px;
     padding: 10px 20px;

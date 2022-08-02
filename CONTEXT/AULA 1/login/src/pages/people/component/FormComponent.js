@@ -7,14 +7,16 @@ import { maskCpf, maskDate } from '../../../consts';
 import { ContainerForm, DivForm } from '../component/PeopleForm.styled';
 import { ButtonSecundary } from '../../../components/button/ButtonPrimary'
 import { Toaster } from 'react-hot-toast';
+import * as Yup from 'yup';
 
 function FormComponent({ isUpdate, id }) {
     const { handleCreateUser, handleUpdate, user } = useContext(PeopleContext)
     console.log(user)
-    
-    if(!user && isUpdate){
+
+    if (!user && isUpdate) {
         return
     }
+
     return (
 
         <Formik
@@ -24,7 +26,6 @@ function FormComponent({ isUpdate, id }) {
                 cpf: user.cpf ? user.cpf : '',
                 email: user.email ? user.email : ''
             }}
-
             onSubmit={(values) => {
                 const newValor = {
                     nome: values.nome,
@@ -35,7 +36,7 @@ function FormComponent({ isUpdate, id }) {
                 !isUpdate ? handleCreateUser(newValor) : handleUpdate(newValor, id)
             }}
         >
-            {props => (
+            {(props) => (
                 <ContainerForm>
                     <div>
                         <h1>{isUpdate ? 'Atualize seus dados' : 'Insira seus dados'}</h1>
@@ -51,6 +52,7 @@ function FormComponent({ isUpdate, id }) {
                                 onChange={props.handleChange}
                                 onBlur={props.handleBlur}
                             />
+
                             <label htmlFor='dataNascimento'>Data de nascimento</label>
                             <MaskedInput
                                 mask={maskDate}
@@ -61,6 +63,7 @@ function FormComponent({ isUpdate, id }) {
                                 onChange={props.handleChange}
                                 onBlur={props.handleBlur}
                             />
+
                             <label htmlFor='cpf'>CPF</label>
                             <MaskedInput
                                 mask={maskCpf}
@@ -82,7 +85,7 @@ function FormComponent({ isUpdate, id }) {
                             />
                             {props.errors.name && <div id="feedback">{props.errors.name}</div>}
                             <div>
-                                <ButtonSecundary style={{cursor: 'pointer'}} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</ButtonSecundary>
+                                <ButtonSecundary style={{ cursor: 'pointer' }} type="submit">{isUpdate ? 'Atualizar' : 'Cadastrar'}</ButtonSecundary>
                                 <Toaster />
                             </div>
                         </DivForm>

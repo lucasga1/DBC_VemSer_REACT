@@ -8,13 +8,17 @@ function Menu() {
 
   return (
     <MenuDiv>
-      <nav>
-        <ul >
-          <Item value='Pessoas' url='/pessoas' />
-        </ul>
-      {auth && <button width="380" onClick={handleLogout} >Sair</button>}
-      </nav>
-    </MenuDiv>
+      <div>
+        <nav>
+          <ul >
+            <Item value='Pessoas' url='/pessoas' />
+          </ul>
+        </nav>
+      </div>
+      <div>
+        {auth && <button onClick={handleLogout} >Sair</button>}
+      </div>
+    </MenuDiv >
   )
 }
 export default Menu

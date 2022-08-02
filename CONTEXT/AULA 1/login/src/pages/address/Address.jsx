@@ -10,11 +10,9 @@ import { ContainerForm, DivForm } from "./Address.styled";
 
 const Address = () => {
 
-  const { verificaCep, handleCreateAddress, handleUpdateAddress, dataCep, isAddressUpdate, idPessoa } = useContext(AddressContext);
-  const { id } = useParams()
+  const { verificaCep, handleCreateAddress, handleUpdateAddress, dataCep } = useContext(AddressContext);
 
-  console.log(idPessoa)
-  console.log(isAddressUpdate)
+  const { idPessoa, idEndereco } = useParams()
   
   return (
     <Formik
@@ -40,8 +38,7 @@ const Address = () => {
           estado: dataCep.uf,
           pais: values.pais
         }
-        console.log(enviaApi)
-        isAddressUpdate ? handleUpdateAddress(enviaApi, id) : handleCreateAddress(enviaApi, id);
+        idEndereco ? handleUpdateAddress(idEndereco, enviaApi) : handleCreateAddress(enviaApi, idPessoa);
       }}
     >
 
@@ -91,14 +88,18 @@ const Address = () => {
                 value={dataCep.uf}
               />
               <label htmlFor="tipo">Tipo*</label>
-              <input
-                id="tipo"
+              <select
                 name="tipo"
+                id="tipo"
                 type="select"
                 placeholder="Tipo"
                 onChange={props.handleChange}
-                value={props.values.tipo}
-              />
+              >
+                <option value={props.tipoContato}></option>
+                <option value={props.tipoContato}>COMERCIAL</option>
+                <option value={props.tipoContato}>RESIDENCIAL</option>
+              </select>
+              
               <label htmlFor="complemento">Complemento</label>
               <input
                 id="complemento"
@@ -127,7 +128,7 @@ const Address = () => {
                 value={props.values.pais}
               />
               <div>
-                <ButtonSecundary type="submit">{isAddressUpdate ? 'Atualizar' : 'Cadastrar'}</ButtonSecundary>
+                <ButtonSecundary style={{ cursor: "pointer" }} type="submit">{idEndereco ? 'Atualizar' : 'Cadastrar'}</ButtonSecundary>
               </div>
             </form>
           </DivForm>

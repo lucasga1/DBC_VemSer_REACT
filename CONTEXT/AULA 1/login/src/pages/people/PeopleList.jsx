@@ -1,11 +1,12 @@
 import { PeopleContext } from "../../context/PeopleContext"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { Pessoa } from './PeopleList.styled';
 import fotoPerfil from '../../imagens/fotoPerfil.png';
 import { AddressContext } from "../../context/AddressContext";
 import ModalAddress from '../address/components/ModalAddress';
 import { message, Popconfirm } from 'antd';
 import moment from "moment";
+import { apiDbc } from "../../api";
 
 function PeopleList() {
 
@@ -20,21 +21,37 @@ function PeopleList() {
 
   const { buscaPessoas, irParaUpdate, handleDelete, getPessoaId } = useContext(PeopleContext);
   const { enderecoPessoa, irParaCadastroEndereco, setIdPessoa, idPessoa, getAddress } = useContext(AddressContext);
-
   console.log(idPessoa)
 
   const [visible, setVisible] = useState(false);
+
+  const [contatosPessoa, setContatosPessoa] = useState();
+
+  const getContact = async (idPessoa) => {
+    try {
+      const { data } = await apiDbc.get(`/contato/${idPessoa}`)
+      setContatosPessoa(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const irParaCadastroContato = (idPessoa) => {
+    window.location.href = `/contatos/${idPessoa}`
+  }
 
   const navegaParaModalAddress = (idPessoa) => {
     setVisible(true)
     setIdPessoa(idPessoa)
     getPessoaId(idPessoa)
     getAddress(idPessoa)
+    getContact(idPessoa)
   }
+
 
   return (
     <>
-      <ModalAddress setVisible={setVisible} visible={visible} enderecoPessoa={enderecoPessoa} idPessoa={idPessoa} />
+      <ModalAddress setVisible={setVisible} visible={visible} enderecoPessoa={enderecoPessoa} idPessoa={idPessoa} contatosPessoa={contatosPessoa} getContact={getContact}/>
       {buscaPessoas.map(({ nome, dataNascimento, cpf, email, idPessoa }) => (
         <Pessoa key={idPessoa}>
           <div >
@@ -53,6 +70,7 @@ function PeopleList() {
               <Popconfirm title="Tem certeza que deseja excluir?" onConfirm={() => confirm(idPessoa)} onCancel={cancel} okText="Sim" cancelText="Não">
                 <button style={{ cursor: 'pointer' }}>Excluir</button>
               </Popconfirm>
+              <button style={{ cursor: 'pointer' }} onClick={() => irParaCadastroContato(idPessoa)}>Cadastrar Contato</button>
               <button style={{ cursor: 'pointer' }} onClick={() => irParaCadastroEndereco(idPessoa)}>Cadastrar Endereço</button>
             </div>
           </div>
@@ -62,7 +80,6 @@ function PeopleList() {
     </>
   )
 }
-
 export default PeopleList
 
 

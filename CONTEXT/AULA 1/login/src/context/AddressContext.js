@@ -1,27 +1,18 @@
 import { apiCep, apiDbc } from "../api";
-import { useState, createContext, useContext, useEffect } from 'react';
+import { useState, createContext } from 'react';
+
 export const AddressContext = createContext();
 
 function AddressProvider({ children }) {
 
     const [enderecoPessoa, setEnderecoPessoa] = useState([]);
     const [dataCep, setDataCep] = useState({});
-    const [idEndereco, setIdEndereco] = useState();
     const [idPessoa, setIdPessoa] = useState();
-    const [isAddressUpdate, setIsAddressUpdate] = useState(false);
 
-    console.log(idPessoa)
-    console.log(idEndereco)
-    console.log(isAddressUpdate)
 
-    const irParaCadastroEndereco = (idPessoa) => {
-        /* setIsAddressUpdate(false) */
-        window.location.href = `/endereco/${idPessoa}`
-    }
-
-    const getAddress = async (idPessoa) => {
+    const getAddress = async (idPessoaa) => {
         try {
-            const { data } = await apiDbc.get(`/endereco/retorna-por-id-pessoa?idPessoa=${idPessoa}`)
+            const { data } = await apiDbc.get(`/endereco/retorna-por-id-pessoa?idPessoa=${idPessoaa}`)
             setEnderecoPessoa(data)
         } catch (error) {
             console.log(error)
@@ -30,9 +21,7 @@ function AddressProvider({ children }) {
 
     const handleCreateAddress = async (values, id) => {
         try {
-            const { data } = await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${id}`, values)
-            console.log(data)
-            console.log(id)
+            await apiDbc.post(`/endereco/{idPessoa}?idPessoa=${id}`, values)
             window.location.href = `/pessoas`
         } catch (error) {
             console.log(error)
@@ -49,9 +38,13 @@ function AddressProvider({ children }) {
         }
     }
 
-    const mudarParaCadastroAtualizar = (idEndereco) => {
-        setIsAddressUpdate(true)
-        window.location.href = `/endereco/${idEndereco}`        
+    const handleUpdateAddress = async (idEndereco, value) => {
+        try {
+            await apiDbc.put(`/endereco/${idEndereco}`, value)
+            window.location.href = `/pessoas`
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const verificaCep = async (value) => {
@@ -63,20 +56,26 @@ function AddressProvider({ children }) {
         }
     }
 
+    const mudarParaCadastroAtualizar = (idEndereco, valueidPessoa) => {
+        window.location.href = `/atualiza-endereco/${valueidPessoa}/${idEndereco}`
+    }
+
+    const irParaCadastroEndereco = (valuesidPessoa) => {
+        window.location.href = `/cadastra-endereco/${valuesidPessoa}`
+    }
+    
     return (
         <AddressContext.Provider value={{
             dataCep,
             enderecoPessoa,
+            idPessoa,
             mudarParaCadastroAtualizar,
             verificaCep,
             handleCreateAddress,
-
-            idPessoa,
+            handleUpdateAddress,
             setIdPessoa,
-            setIdEndereco,
             setDataCep,
             getAddress,
-            isAddressUpdate,            
             irParaCadastroEndereco,
             handleDeleteAddress
         }} >

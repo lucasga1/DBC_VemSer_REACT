@@ -14,8 +14,6 @@ function Login() {
     
     const SignupSchema = Yup.object().shape({
         login: Yup.string()
-            .min(2, 'Muito curta')
-            .max(50, 'Muito longo')
             .required('Preenchimento Obrigatório'),
         senha: Yup.string()
             .min(2, 'Muito curta')

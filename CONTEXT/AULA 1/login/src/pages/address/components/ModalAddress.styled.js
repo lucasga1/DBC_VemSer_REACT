@@ -38,7 +38,6 @@ justify-items: center;
 
     & button {
         margin: 0 10px 20px 10px;
-        cursor: pointer;
-    }
+            }
 }
 `;

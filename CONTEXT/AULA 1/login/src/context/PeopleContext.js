@@ -10,6 +10,7 @@ function PeopleProvider({ children }) {
     const [isUpdate, setIsUpdate] = useState(false)
     const [user, setUser] = useState([])
 
+//toastr/////////////////////////////////////////////////////////////
     const notifyPositive = (value) => toast(value, {
         position: 'top-right',
         style: {
@@ -24,11 +25,13 @@ function PeopleProvider({ children }) {
             color: '#fff'
         },
     });
+//////////////////////////////////////////////////////////////////////
 
     async function setup() {
         try {
             const { data } = await apiDbc.get('/pessoa?pagina=0&tamanhoDasPaginas=20')
             setBuscaPessoas(data.content)
+            console.log(data.content)
         } catch (error) {
             console.log(error)
         }
