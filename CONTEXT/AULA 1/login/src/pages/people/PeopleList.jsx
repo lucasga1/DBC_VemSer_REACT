@@ -14,17 +14,12 @@ function PeopleList() {
     message.success('Usuário excluído com sucesso');
     handleDelete(idPessoa)
   };
-
   const cancel = () => {
     message.error('Usuário não excluído');
   };
-
   const { buscaPessoas, irParaUpdate, handleDelete, getPessoaId } = useContext(PeopleContext);
   const { enderecoPessoa, irParaCadastroEndereco, setIdPessoa, idPessoa, getAddress } = useContext(AddressContext);
-  console.log(idPessoa)
-
   const [visible, setVisible] = useState(false);
-
   const [contatosPessoa, setContatosPessoa] = useState();
 
   const getContact = async (idPessoa) => {

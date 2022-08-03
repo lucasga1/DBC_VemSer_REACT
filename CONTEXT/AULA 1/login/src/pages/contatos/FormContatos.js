@@ -41,6 +41,7 @@ function FormContatos() {
                         telefone: values.telefone.replace(/[^0-9]/gi, ''),
                         descricao: values.descricao
                     }
+                    console.log(contatoApi)
                     idContato ? handleUpdateContact(contatoApi, idContato) : handleCreateContact(contatoApi, idPessoa);
                 }}
             >
