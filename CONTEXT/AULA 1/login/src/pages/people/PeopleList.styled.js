@@ -29,7 +29,7 @@ border: 1px solid #E5E5E5;
 & div {
     display: grid;
     align-items: center;
-    text-align: center;
+    text-align: start;
     grid-template-columns: repeat(4, 1fr);
     font-size: 16px;  
     padding: 5px 15px;  
@@ -39,10 +39,11 @@ border: 1px solid #E5E5E5;
 
 & button {
     display: none;
-    width: 170px;
+    font-size: 12px;
+    width: 130px;
     font-family: 'Mulish';
     margin: 0px 5px;
-    padding: 3px;
+    padding: 5px 5px;
     background-color: #3751FF;
     border: none;
     border-radius: 8px;

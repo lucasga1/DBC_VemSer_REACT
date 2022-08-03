@@ -39,7 +39,7 @@ function FormComponent({ isUpdate, id }) {
             {(props) => (
                 <ContainerForm>
                     <div>
-                        <h1>{isUpdate ? 'Atualize seus dados' : 'Insira seus dados'}</h1>
+                        <h1>{isUpdate ? 'Atualize seu dados' : 'Insira seus dados'}</h1>
                     </div>
                     <form onSubmit={props.handleSubmit}>
                         <DivForm>

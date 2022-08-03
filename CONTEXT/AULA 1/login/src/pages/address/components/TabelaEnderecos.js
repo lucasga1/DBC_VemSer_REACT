@@ -1,16 +1,11 @@
-import { Modal } from 'antd';
 import 'antd/dist/antd.css';
-import { useContext, useEffect } from 'react';
-import { apiDbc } from '../../../api';
+import { useContext } from 'react';
 import { ButtonSecundary } from '../../../components/button/ButtonPrimary';
 import { AddressContext } from '../../../context/AddressContext';
-import { DivDescricao, Endereco, DivContent } from './ModalAddress.styled'
 import { message, Popconfirm } from 'antd';
+import { DivContent } from './TabelEnderecos.styled'
 
-function TabelaEnderecos({
-    tipo, logradouro, numero, complemento,
-    cep, cidade, estado, pais, idEndereco,
-    visible, setVisible, enderecoPessoa, idPessoa }) {
+function TabelaEnderecos({ visible, setVisible, enderecoPessoa, idPessoa }) {
 
     const { handleDeleteAddress, mudarParaCadastroAtualizar } = useContext(AddressContext)
     // toastr ////////////////////////////////////////////
@@ -24,20 +19,25 @@ function TabelaEnderecos({
     /////////////////////////////////////////////////////
 
     return (
-        <div>
-            <DivContent key={idEndereco} >                
-                <Endereco>
+        <DivContent>
+            <h1>Endereços do usuário</h1>
+            {enderecoPessoa.map(({ tipo, logradouro, numero, complemento, cep, cidade, estado, pais, idEndereco }) => (
+                <div key={idEndereco} >
                     <div>
-                        <li>{tipo}</li>
-                        <li>{logradouro}</li>
-                        <li>{numero}</li>
-                        <li>{complemento}</li>
-                        <li>{cep.replace(/\D/g, '')
-                            .replace(/(\d{5})(\d)/, '$1-$2')
-                            .replace(/(-\d{3})\d+?$/, '$1')}</li>
-                        <li>{cidade}</li>
-                        <li>{estado}</li>
-                        <li>{pais}</li>
+                        <div>
+                            <li>Tipo: <span>{tipo}</span></li>
+                            <li>Logradouro: <span>{logradouro}</span></li>
+                            <li>Número: <span>{numero}</span></li>
+                            <li>Complemento: <span>{complemento}</span></li>
+                        </div>
+                        <div>
+                            <li>CEP: <span>{cep.replace(/\D/g, '')
+                                .replace(/(\d{5})(\d)/, '$1-$2')
+                                .replace(/(-\d{3})\d+?$/, '$1')}</span></li>
+                            <li>Cidade: <span>{cidade}</span></li>
+                            <li>Estado: <span>{estado}</span></li>
+                            <li>Pais: <span>{pais}</span></li>
+                        </div>
                     </div>
                     <div>
                         <ButtonSecundary style={{ cursor: "pointer", marginTop: '8px' }} onClick={() => mudarParaCadastroAtualizar(idEndereco, idPessoa)}>Atualizar</ButtonSecundary>
@@ -49,9 +49,10 @@ function TabelaEnderecos({
                             <ButtonSecundary style={{ cursor: "pointer", marginTop: '8px' }}>Excluir</ButtonSecundary>
                         </Popconfirm>
                     </div>
-                </Endereco>
-            </DivContent>
-        </div>
+                </div>
+            ))}
+        </DivContent>
     )
 }
 export default TabelaEnderecos
+

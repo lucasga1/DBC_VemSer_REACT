@@ -31,7 +31,8 @@ function Routers() {
                                 <>
                                     <Route path='/cadastra-endereco/:idPessoa' element={<Address />}></Route>
                                     <Route path='/atualiza-endereco/:idPessoa/:idEndereco' element={<Address />}></Route>
-                                    <Route path='/contatos/:id' element={<FormContatos />}></Route>
+                                    <Route path='/contatos/:idPessoa' element={<FormContatos />}></Route>
+                                    <Route path='/atualiza-contato/:idPessoa/:idContato' element={<FormContatos />}></Route>
                                     <Route path='/pessoas' element={<PeopleDetails />}></Route>
                                     <Route path='/cadastra-pessoa' element={<PeopleForm />}></Route>
                                     <Route path='/atualiza-pessoa/:id' element={<PeopleForm />}></Route>

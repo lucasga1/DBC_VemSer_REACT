@@ -60,14 +60,14 @@ cursor: pointer;
 export const Descricao = styled.div`
 display: grid;
 grid-template-columns: repeat(4, 1fr);
-text-align: center;
+text-align: s;
 padding: 10px 15px;
 border:  1px solid #DFE0EB;
 border-top: none;
 font-weight: 700;
 font-size: 16px;
 font-family: 'Mulish';
-color: #9FA2B4;
+color: #000000;
 
 `;
 

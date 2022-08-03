@@ -33,6 +33,22 @@ width: 800px;
     padding: 10px 25px;
 }
 
+& select {
+        margin: 0 25px;
+        padding-left: 15px;
+        height: 35px;
+        border:  1.5px solid #DFE0EB;
+        border-radius: 8px;
+    }
+
+    & select::placeholder {
+    font-family: 'Mulish';    
+    }
+
+    & select:focus {
+    outline: none;
+    background-color: #E5E5E5;
+    }
 
 & input {
     margin: 0 25px;

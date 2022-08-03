@@ -6,12 +6,13 @@ export const MenuDiv = styled.div`
  
     & button {
     width: 100px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     background-color: #3751FF;
     color: #fff;
     border: none;
     font-family: 'Mulish', sans-serif;
     border-radius: 8px;
+    cursor: pointer;
     }
 
     & button:focus {

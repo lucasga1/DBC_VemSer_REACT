@@ -45,7 +45,7 @@ const Address = () => {
       {props => (
         <ContainerForm>
           <div>
-            <h1>Insira seus dados do seu endereço</h1>
+          <h1>{idEndereco ? 'Atualize seu endereço' : 'Cadastre um novo endereço'}</h1>
           </div>
           <DivForm>
             <form onSubmit={props.handleSubmit}>
