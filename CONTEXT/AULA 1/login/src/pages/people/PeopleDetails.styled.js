@@ -58,7 +58,9 @@ cursor: pointer;
 `;
 
 export const Descricao = styled.div`
-display: flex;
+display: grid;
+grid-template-columns: repeat(4, 1fr);
+text-align: center;
 padding: 10px 15px;
 border:  1px solid #DFE0EB;
 border-top: none;
@@ -66,17 +68,7 @@ font-weight: 700;
 font-size: 16px;
 font-family: 'Mulish';
 color: #9FA2B4;
-& p {
-  width: 200px;
-}
 
-& p:nth-child(4) {
-  width: 225px;
-}
-
-& p:last-child{
-  width: 325px;
-}
 `;
 
 export const DivFlex = styled.div`

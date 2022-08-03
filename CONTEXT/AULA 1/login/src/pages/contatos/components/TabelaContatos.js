@@ -1,4 +1,5 @@
 import { apiDbc } from "../../../api"
+import { ButtonSecundary } from "../../../components/button/ButtonPrimary"
 
 function TabelaContatos({ contatosPessoa, getContact, idPessoa }) {
 
@@ -19,14 +20,12 @@ function TabelaContatos({ contatosPessoa, getContact, idPessoa }) {
 
             {contatosPessoa.map(contatosPessoa => (
 
-                <div key={contatosPessoa.idContato}>
-                    <p>{contatosPessoa.idPessoa}</p>
-                    <p>{contatosPessoa.tipoContato}</p>
-                    <p>{contatosPessoa.telefone}</p>
-                    <p>{contatosPessoa.descricao}</p>
-                    <p>{contatosPessoa.idContato}</p>
-                    <button>Atualizar</button>
-                    <button onClick={() => handleDeleteContact(contatosPessoa.idContato)}>Excluir</button>
+                <div key={contatosPessoa.idContato}>                    
+                    <p>Tipo: {contatosPessoa.tipoContato}</p>
+                    <p>Número: {contatosPessoa.telefone}</p>
+                    <p>Descrição: {contatosPessoa.descricao}</p>
+                    <ButtonSecundary>Atualizar</ButtonSecundary>
+                    <ButtonSecundary onClick={() => handleDeleteContact(contatosPessoa.idContato)}>Excluir</ButtonSecundary>
                 </div>
             ))}
         </>

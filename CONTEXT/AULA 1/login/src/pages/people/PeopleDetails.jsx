@@ -43,7 +43,6 @@ function PeopleDetails() {
                         <p>Data de Nascimento</p>
                         <p>CPF</p>
                         <p>E-mail</p>
-                        <p>Selecione</p>
                     </Descricao>
                     <PeopleList />
                     <DivButtonRegister>

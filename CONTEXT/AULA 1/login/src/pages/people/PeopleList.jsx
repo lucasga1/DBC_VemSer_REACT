@@ -55,7 +55,7 @@ function PeopleList() {
       {buscaPessoas.map(({ nome, dataNascimento, cpf, email, idPessoa }) => (
         <Pessoa key={idPessoa}>
           <div >
-            <span onClick={() => navegaParaModalAddress(idPessoa)}>
+            <div style={{ cursor: 'pointer' }} onClick={() => navegaParaModalAddress(idPessoa)}>
               <li><img src={fotoPerfil} alt="Lucas" />{nome}</li>
               <li>{moment(dataNascimento, 'YYYY-MM-DD').format('DD/MM/YYYY')}</li>
               <li>{cpf.replace(/\D/g, '')
@@ -64,11 +64,11 @@ function PeopleList() {
                 .replace(/(\d{3})(\d)/, '$1-$2')
                 .replace(/(-\d{2})\d+?$/, '$1')}</li>
               <li>{email}</li>
-            </span>
+            </div>
             <div>
-              <button style={{ cursor: 'pointer' }} onClick={() => irParaUpdate(idPessoa)}>Atualizar</button>
+              <button style={{ cursor: 'pointer' }} onClick={() => irParaUpdate(idPessoa)}>Atualizar usuário</button>
               <Popconfirm title="Tem certeza que deseja excluir?" onConfirm={() => confirm(idPessoa)} onCancel={cancel} okText="Sim" cancelText="Não">
-                <button style={{ cursor: 'pointer' }}>Excluir</button>
+                <button style={{ cursor: 'pointer' }}>Excluir usuário</button>
               </Popconfirm>
               <button style={{ cursor: 'pointer' }} onClick={() => irParaCadastroContato(idPessoa)}>Cadastrar Contato</button>
               <button style={{ cursor: 'pointer' }} onClick={() => irParaCadastroEndereco(idPessoa)}>Cadastrar Endereço</button>
